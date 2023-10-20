@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: fluxcd-manager
+  labels:
+    app: fluxcd-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fluxcd-manager
+  template:
+    metadata:
+      labels:
+        app: fluxcd-manager
+    spec:
+      serviceAccountName: fluxcd-addon-sa
+      containers:
+        - name: fluxcd-manager
+          image: docker.io/imtiazcho/fluxcd-addon
+          imagePullPolicy: Always

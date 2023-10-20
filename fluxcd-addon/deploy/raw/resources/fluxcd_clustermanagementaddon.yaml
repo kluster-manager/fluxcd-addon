@@ -1,0 +1,15 @@
+apiVersion: addon.open-cluster-management.io/v1alpha1
+kind: ClusterManagementAddOn
+metadata:
+  name: fluxcd-addon
+  annotations:
+    addon.open-cluster-management.io/lifecycle: "addon-manager"
+spec:
+  addOnMeta:
+    displayName: fluxcd-addon
+    description: "fluxcd-addon installs fluxcd in every managed cluster"
+  installStrategy:
+    type: Placements
+    placements:
+      - name: fluxcd-global-placement
+        namespace: fluxcd-manager
