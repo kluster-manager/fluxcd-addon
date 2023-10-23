@@ -14,8 +14,9 @@ import (
 	"open-cluster-management.io/addon-framework/pkg/utils"
 )
 
-//go:embed manifests/flux2
-//go:embed manifests/flux2/templates/_helper.tpl
+//go:embed manifests
+//go:embed manifests/helloworld
+//go:embed manifests/helloworld/templates/_helpers.tpl
 var FS embed.FS
 
 const (
@@ -33,12 +34,11 @@ func NewManagerCommand() *cobra.Command {
 }
 
 func runManagerController(ctx context.Context, kubeconfig *rest.Config) error {
-	klog.Infof("----------------------------------hello kubeconfig: ", kubeconfig)
 	mgr, err := addonmanager.New(kubeconfig)
 	if err != nil {
 		return err
 	}
-	agent, err := addonfactory.NewAgentAddonFactory(AddonName, FS, "manifests/flux2").
+	agent, err := addonfactory.NewAgentAddonFactory(AddonName, FS, "manifests/helloworld").
 		WithAgentHealthProber(utils.NewDeploymentProber(types.NamespacedName{Name: "helm-controller", Namespace: "flux-system"})).
 		BuildHelmAgentAddon()
 	if err != nil {
