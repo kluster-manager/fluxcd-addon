@@ -13,8 +13,7 @@ resources:
   - resources/fluxcd_clustermanagementaddon.yaml
   - resources/fluxcd_deployment.yaml
 
-
 images:
   - name: docker.io/imtiazcho/fluxcd-addon
     newName: docker.io/imtiazcho/fluxcd-addon
-    newTag: 0.0.6
+    newTag: 0.0.12
