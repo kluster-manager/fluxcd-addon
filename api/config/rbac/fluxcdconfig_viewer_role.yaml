@@ -1,0 +1,27 @@
+# permissions for end users to view fluxcdconfigs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: fluxcdconfig-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: api
+    app.kubernetes.io/part-of: api
+    app.kubernetes.io/managed-by: kustomize
+  name: fluxcdconfig-viewer-role
+rules:
+- apiGroups:
+  - fluxcd.open-cluster-management.io
+  resources:
+  - fluxcdconfigs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - fluxcd.open-cluster-management.io
+  resources:
+  - fluxcdconfigs/status
+  verbs:
+  - get
