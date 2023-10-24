@@ -13,3 +13,9 @@ spec:
     placements:
       - name: fluxcd-global-placement
         namespace: fluxcd-manager
+
+  supportedConfigs:
+    - resource: configmaps
+      defaultConfig:
+        name: fluxcd-installation-config
+        namespace: fluxcd-manager

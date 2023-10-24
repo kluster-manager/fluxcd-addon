@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/imtiazcho/fluxcd-addon:0.0.12
+IMG ?= docker.io/imtiazcho/fluxcd-addon:0.1.3
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -71,5 +71,6 @@ undeploy-addon: ## Delete deployed manifests from the hub cluster
 
 .PHONY: deploy-addon-all
 deploy-addon-all:
+	make undeploy-addon
 	make docker-push
 	make deploy-addon

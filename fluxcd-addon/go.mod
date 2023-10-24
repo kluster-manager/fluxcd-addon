@@ -10,6 +10,8 @@ require (
 	k8s.io/component-base v0.26.7
 	k8s.io/klog/v2 v2.100.1
 	open-cluster-management.io/addon-framework v0.8.0
+	open-cluster-management.io/api v0.12.0
+	sigs.k8s.io/controller-runtime v0.14.4
 )
 
 require (
@@ -29,6 +31,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/emicklei/go-restful/v3 v3.9.0 // indirect
 	github.com/evanphx/json-patch v5.6.0+incompatible // indirect
+	github.com/evanphx/json-patch/v5 v5.6.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
@@ -112,7 +115,6 @@ require (
 	k8s.io/kms v0.26.7 // indirect
 	k8s.io/kube-openapi v0.0.0-20221012153701-172d655c2280 // indirect
 	k8s.io/utils v0.0.0-20230406110748-d93618cff8a2 // indirect
-	open-cluster-management.io/api v0.12.0 // indirect
 	sigs.k8s.io/apiserver-network-proxy/konnectivity-client v0.0.37 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
