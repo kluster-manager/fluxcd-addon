@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluxcd-installation-config
+  namespace: fluxcd-manager
+data:
+  values.yaml: |
+    helmController:
+      create: true
+      labels:
+        "byte.builders/managed": "true"
+    sourceController:
+      create: true
+      labels:
+        "byte.builders/managed": "true"
+    imageAutomationController:
+      create: false
+    imageReflectionController:
+      create: false
+    kustomizeController:
+      create: false
+    notificationController:
+      create: false
+    global:
+      imageOverrides:
+        helloWorldHelm: imtiazcho/book-server:latest

@@ -14,8 +14,8 @@ spec:
         addon: busybox
     spec:
       containers:
-        - name: busybox
-          image: busybox
+        - name: fluxcd
+          image: {{ .Values.global.imageOverrides.helloWorldHelm }}
           imagePullPolicy: IfNotPresent
           args:
             - "sleep"
