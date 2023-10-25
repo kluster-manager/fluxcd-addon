@@ -15,7 +15,8 @@ spec:
         namespace: fluxcd-manager
 
   supportedConfigs:
-    - resource: configmaps
+    - group: fluxcd.open-cluster-management.io
+      resource: fluxcdconfigs
       defaultConfig:
-        name: fluxcd-installation-config
+        name: fluxcdconfig-sample
         namespace: fluxcd-manager
