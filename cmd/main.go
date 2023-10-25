@@ -3,10 +3,10 @@ package main
 import (
 	goflag "flag"
 	"fmt"
+	"github.com/kluster-management/fluxcd-addon/pkg/manager"
 	"os"
 	"time"
 
-	"github.com/kluster-management/fluxcd-addon/pkg/manager"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
 	"k8s.io/apimachinery/pkg/util/rand"

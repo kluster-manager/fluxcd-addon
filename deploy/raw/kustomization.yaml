@@ -8,13 +8,13 @@ resources:
   - resources/service_account.yaml
   - resources/cluster_role.yaml
   - resources/cluster_role_binding.yaml
-  - resources/installation_config.yaml
+  - resources/fluxcd_config.yaml
   - resources/clustersetsbinding.yaml
   - resources/placement.yaml
-  - resources/fluxcd_clustermanagementaddon.yaml
-  - resources/fluxcd_deployment.yaml
+  - resources/clustermanagementaddon.yaml
+  - resources/deployment.yaml
 
 images:
   - name: docker.io/imtiazcho/fluxcd-addon
     newName: docker.io/imtiazcho/fluxcd-addon
-    newTag: 0.1.3
+    newTag: 0.3.1

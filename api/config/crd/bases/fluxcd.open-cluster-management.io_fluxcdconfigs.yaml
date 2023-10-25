@@ -909,6 +909,7 @@ spec:
                       type: string
                     type: object
                   image:
+                    default: ghcr.io/fluxcd/flux-cli
                     type: string
                   nodeSelector:
                     additionalProperties:
@@ -917,11 +918,13 @@ spec:
                   serviceAccount:
                     properties:
                       automount:
+                        default: true
                         type: boolean
                     required:
                     - automount
                     type: object
                   tag:
+                    default: v2.1.1
                     type: string
                   tolerations:
                     items:
@@ -1982,6 +1985,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -3096,6 +3104,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -4222,6 +4235,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -5397,6 +5415,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -5531,10 +5554,12 @@ spec:
               multitenancy:
                 properties:
                   defaultServiceAccount:
+                    default: default
                     type: string
                   enabled:
                     type: boolean
                   privileged:
+                    default: true
                     type: boolean
                 required:
                 - defaultServiceAccount
@@ -6544,6 +6569,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -7750,6 +7780,11 @@ spec:
                   imagePullPolicy:
                     description: PullPolicy describes a policy for if/when to pull
                       a container image
+                    enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                    - ""
                     type: string
                   labels:
                     additionalProperties:
@@ -7881,10 +7916,8 @@ spec:
             required:
             - cli
             - clusterDomain
-            - extraObjects
             - helmController
             - imageAutomationController
-            - imagePullSecrets
             - imageReflectionController
             - installCRDs
             - kustomizeController
@@ -7897,6 +7930,9 @@ spec:
             - sourceController
             - watchAllNamespaces
             type: object
+        required:
+        - metadata
+        - spec
         type: object
     served: true
     storage: true
