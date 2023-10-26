@@ -12,10 +12,10 @@ spec:
     type: Placements
     placements:
       - name: fluxcd-global-placement
-        namespace: fluxcd-manager
+        namespace: open-cluster-management
   supportedConfigs:
     - group: fluxcd.open-cluster-management.io
       resource: fluxcdconfigs
       defaultConfig:
         name: fluxcdconfig-sample
-        namespace: fluxcd-manager
+        namespace: open-cluster-management
