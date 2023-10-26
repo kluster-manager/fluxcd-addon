@@ -13,6 +13,10 @@ spec:
     placements:
       - name: fluxcd-global-placement
         namespace: open-cluster-management
+        rolloutStrategy:
+          type: RollingUpdate
+          rollingUpdate:
+            maxConcurrentlyUpdating: 25%
   supportedConfigs:
     - group: fluxcd.open-cluster-management.io
       resource: fluxcdconfigs
