@@ -75,25 +75,24 @@ type ControllerSpec struct {
 	Image     string               `json:"image"`
 	Tag       string               `json:"tag"`
 	Resources ResourceRequirements `json:"resources"`
-
-	//+Optional
+	//+optional
 	PriorityClassName string            `json:"priorityClassName"`
 	Annotations       map[string]string `json:"annotations"`
-	//+Optional
+	//+optional
 	Labels    map[string]string `json:"labels"`
 	Container ContainerSpec     `json:"container"`
-	//+Optional
+	//+optional
 	ExtraEnv       []core.EnvVar      `json:"extraEnv"`
 	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 
-	//+Optional
+	//+optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
 	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
-	//+Optional
+	//+optional
 	NodeSelector map[string]string `json:"nodeSelector"`
-	//+Optional
+	//+optional
 	Affinity core.Affinity `json:"affinity"`
-	//+Optional
+	//+optional
 	Tolerations []core.Toleration `json:"tolerations"`
 }
 
@@ -102,28 +101,28 @@ type KustomizeControllerSpec struct {
 	Image     string               `json:"image"`
 	Tag       string               `json:"tag"`
 	Resources ResourceRequirements `json:"resources"`
-	//+Optional
+	//+optional
 	PriorityClassName string            `json:"priorityClassName"`
 	Annotations       map[string]string `json:"annotations"`
-	//+Optional
+	//+optional
 	Labels    map[string]string `json:"labels"`
 	Container ContainerSpec     `json:"container"`
 	EnvFrom   EnvFromSource     `json:"envFrom"`
-	//+Optional
+	//+optional
 	ExtraEnv []core.EnvVar `json:"extraEnv"`
-	//+Optional
+	//+optional
 	ExtraSecretMounts []core.VolumeMount `json:"extraSecretMounts"`
 	ServiceAccount    ServiceAccountSpec `json:"serviceAccount"`
 
-	//+Optional
+	//+optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
 	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	Secret          SecretSpec      `json:"secret"`
-	//+Optional
+	//+optional
 	NodeSelector map[string]string `json:"nodeSelector"`
-	//+Optional
+	//+optional
 	Affinity core.Affinity `json:"affinity"`
-	//+Optional
+	//+optional
 	Tolerations []core.Toleration `json:"tolerations"`
 }
 
@@ -138,26 +137,26 @@ type NotificationControllerSpec struct {
 	Image     string               `json:"image"`
 	Tag       string               `json:"tag"`
 	Resources ResourceRequirements `json:"resources"`
-	//+Optional
+	//+optional
 	PriorityClassName string            `json:"priorityClassName"`
 	Annotations       map[string]string `json:"annotations"`
-	//+Optional
+	//+optional
 	Labels    map[string]string `json:"labels"`
 	Container ContainerSpec     `json:"container"`
-	//+Optional
+	//+optional
 	ExtraEnv       []core.EnvVar      `json:"extraEnv"`
 	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 
-	//+Optional
+	//+optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
 	ImagePullPolicy core.PullPolicy     `json:"imagePullPolicy"`
 	Service         ServiceSpec         `json:"service"`
 	WebhookReceiver WebhookReceiverSpec `json:"webhookReceiver"`
-	//+Optional
+	//+optional
 	NodeSelector map[string]string `json:"nodeSelector"`
-	//+Optional
+	//+optional
 	Affinity core.Affinity `json:"affinity"`
-	//+Optional
+	//+optional
 	Tolerations []core.Toleration `json:"tolerations"`
 }
 
@@ -170,33 +169,33 @@ type SourceControllerSpec struct {
 	Image     string               `json:"image"`
 	Tag       string               `json:"tag"`
 	Resources ResourceRequirements `json:"resources"`
-	//+Optional
+	//+optional
 	PriorityClassName string `json:"priorityClassName"`
-	//+Optional
+	//+optional
 	Annotations map[string]string `json:"annotations"`
-	//+Optional
+	//+optional
 	Labels    map[string]string `json:"labels"`
 	Container ContainerSpec     `json:"container"`
-	//+Optional
+	//+optional
 	ExtraEnv       []core.EnvVar      `json:"extraEnv"`
 	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 
-	//+Optional
+	//+optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
 	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	Service         ServiceSpec     `json:"service"`
-	//+Optional
+	//+optional
 	NodeSelector map[string]string `json:"nodeSelector"`
-	//+Optional
+	//+optional
 	Affinity core.Affinity `json:"affinity"`
-	//+Optional
+	//+optional
 	Tolerations []core.Toleration `json:"tolerations"`
 }
 
 type ServiceSpec struct {
-	//+Optional
+	//+optional
 	Labels map[string]string `json:"labels"`
-	//+Optional
+	//+optional
 	Annotations map[string]string `json:"annotations"`
 }
 
@@ -204,13 +203,13 @@ type ServiceSpec struct {
 type ResourceRequirements struct {
 	// Limits describes the maximum amount of compute resources allowed.
 	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-	// +optional
+	//+optional
 	Limits core.ResourceList `json:"limits"`
 	// Requests describes the minimum amount of compute resources required.
 	// If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
 	// otherwise to an implementation-defined value.
 	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-	// +optional
+	//+optional
 	Requests core.ResourceList `json:"requests"`
 }
 
@@ -223,12 +222,12 @@ type LocalObjectReference struct {
 	// Name of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 	// TODO: Add other useful fields. apiVersion, kind, uid?
-	// +optional
+	//+optional
 	Name string `json:"name"`
 }
 
 type ContainerSpec struct {
-	//+Optional
+	//+optional
 	AdditionalArgs []string `json:"additionalArgs"`
 }
 

@@ -11,6 +11,8 @@ metadata:
     control-plane: controller
     {{- with .Values.sourceController.service.labels }}{{ toYaml . | nindent 4 }}{{ end }}
   name: source-controller
+  namespace: {{ .Release.Namespace }}
+
   {{- with .Values.sourceController.service.annotations }}
   annotations: {{ toYaml . | nindent 4 }}
   {{- end }}

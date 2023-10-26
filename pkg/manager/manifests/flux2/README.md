@@ -1,6 +1,6 @@
 # flux2
 
-![Version: 2.10.2](https://img.shields.io/badge/Version-2.10.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.1](https://img.shields.io/badge/AppVersion-2.1.1-informational?style=flat-square)
+![Version: 2.10.5](https://img.shields.io/badge/Version-2.10.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.1.2](https://img.shields.io/badge/AppVersion-2.1.2-informational?style=flat-square)
 
 A Helm chart for flux2
 
@@ -19,7 +19,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | cli.image | string | `"ghcr.io/fluxcd/flux-cli"` |  |
 | cli.nodeSelector | object | `{}` |  |
 | cli.serviceAccount.automount | bool | `true` |  |
-| cli.tag | string | `"v2.1.1"` |  |
+| cli.tag | string | `"v2.1.2"` |  |
 | cli.tolerations | list | `[]` |  |
 | clusterDomain | string | `"cluster.local"` |  |
 | extraObjects | list | `[]` | Array of extra K8s manifests to deploy |
@@ -30,7 +30,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | helmController.create | bool | `true` |  |
 | helmController.extraEnv | list | `[]` |  |
 | helmController.image | string | `"ghcr.io/fluxcd/helm-controller"` |  |
-| helmController.imagePullPolicy | object | `{}` |  |
+| helmController.imagePullPolicy | string | `""` |  |
 | helmController.labels | object | `{}` |  |
 | helmController.nodeSelector | object | `{}` |  |
 | helmController.priorityClassName | string | `""` |  |
@@ -40,7 +40,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | helmController.serviceAccount.annotations | object | `{}` |  |
 | helmController.serviceAccount.automount | bool | `true` |  |
 | helmController.serviceAccount.create | bool | `true` |  |
-| helmController.tag | string | `"v0.36.1"` |  |
+| helmController.tag | string | `"v0.36.2"` |  |
 | helmController.tolerations | list | `[]` |  |
 | imageAutomationController.affinity | object | `{}` |  |
 | imageAutomationController.annotations."prometheus.io/port" | string | `"8080"` |  |
@@ -49,7 +49,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | imageAutomationController.create | bool | `true` |  |
 | imageAutomationController.extraEnv | list | `[]` |  |
 | imageAutomationController.image | string | `"ghcr.io/fluxcd/image-automation-controller"` |  |
-| imageAutomationController.imagePullPolicy | object | `{}` |  |
+| imageAutomationController.imagePullPolicy | string | `""` |  |
 | imageAutomationController.labels | object | `{}` |  |
 | imageAutomationController.nodeSelector | object | `{}` |  |
 | imageAutomationController.priorityClassName | string | `""` |  |
@@ -69,7 +69,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | imageReflectionController.create | bool | `true` |  |
 | imageReflectionController.extraEnv | list | `[]` |  |
 | imageReflectionController.image | string | `"ghcr.io/fluxcd/image-reflector-controller"` |  |
-| imageReflectionController.imagePullPolicy | object | `{}` |  |
+| imageReflectionController.imagePullPolicy | string | `""` |  |
 | imageReflectionController.labels | object | `{}` |  |
 | imageReflectionController.nodeSelector | object | `{}` |  |
 | imageReflectionController.priorityClassName | string | `""` |  |
@@ -91,7 +91,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | kustomizeController.extraEnv | list | `[]` |  |
 | kustomizeController.extraSecretMounts | list | `[]` | Defines additional mounts with secrets. Secrets must be manually created in the namespace or with kustomizeController.secret |
 | kustomizeController.image | string | `"ghcr.io/fluxcd/kustomize-controller"` |  |
-| kustomizeController.imagePullPolicy | object | `{}` |  |
+| kustomizeController.imagePullPolicy | string | `""` |  |
 | kustomizeController.labels | object | `{}` |  |
 | kustomizeController.nodeSelector | object | `{}` |  |
 | kustomizeController.priorityClassName | string | `""` |  |
@@ -104,7 +104,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | kustomizeController.serviceAccount.annotations | object | `{}` |  |
 | kustomizeController.serviceAccount.automount | bool | `true` |  |
 | kustomizeController.serviceAccount.create | bool | `true` |  |
-| kustomizeController.tag | string | `"v1.1.0"` |  |
+| kustomizeController.tag | string | `"v1.1.1"` |  |
 | kustomizeController.tolerations | list | `[]` |  |
 | logLevel | string | `"info"` |  |
 | multitenancy.defaultServiceAccount | string | `"default"` | All Kustomizations and HelmReleases which don’t have spec.serviceAccountName specified, will use the default account from the tenant’s namespace. Tenants have to specify a service account in their Flux resources to be able to deploy workloads in their namespaces as the default account has no permissions. |
@@ -117,7 +117,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | notificationController.create | bool | `true` |  |
 | notificationController.extraEnv | list | `[]` |  |
 | notificationController.image | string | `"ghcr.io/fluxcd/notification-controller"` |  |
-| notificationController.imagePullPolicy | object | `{}` |  |
+| notificationController.imagePullPolicy | string | `""` |  |
 | notificationController.labels | object | `{}` |  |
 | notificationController.nodeSelector | object | `{}` |  |
 | notificationController.priorityClassName | string | `""` |  |
@@ -148,7 +148,7 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | sourceController.create | bool | `true` |  |
 | sourceController.extraEnv | list | `[]` |  |
 | sourceController.image | string | `"ghcr.io/fluxcd/source-controller"` |  |
-| sourceController.imagePullPolicy | object | `{}` |  |
+| sourceController.imagePullPolicy | string | `""` |  |
 | sourceController.labels | object | `{}` |  |
 | sourceController.nodeSelector | object | `{}` |  |
 | sourceController.priorityClassName | string | `""` |  |
@@ -160,6 +160,6 @@ This helm chart is maintain and released by the fluxcd-community on a best effor
 | sourceController.serviceAccount.annotations | object | `{}` |  |
 | sourceController.serviceAccount.automount | bool | `true` |  |
 | sourceController.serviceAccount.create | bool | `true` |  |
-| sourceController.tag | string | `"v1.1.1"` |  |
+| sourceController.tag | string | `"v1.1.2"` |  |
 | sourceController.tolerations | list | `[]` |  |
 | watchAllNamespaces | bool | `true` |  |

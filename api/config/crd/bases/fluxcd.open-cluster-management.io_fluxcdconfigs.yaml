@@ -1862,8 +1862,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -2086,20 +2084,13 @@ spec:
                       type: object
                     type: array
                 required:
-                - affinity
                 - annotations
                 - container
                 - create
-                - extraEnv
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - serviceAccount
                 - tag
-                - tolerations
                 type: object
               imageAutomationController:
                 properties:
@@ -2981,8 +2972,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -3205,20 +3194,13 @@ spec:
                       type: object
                     type: array
                 required:
-                - affinity
                 - annotations
                 - container
                 - create
-                - extraEnv
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - serviceAccount
                 - tag
-                - tolerations
                 type: object
               imagePullSecrets:
                 items:
@@ -4112,8 +4094,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -4336,20 +4316,13 @@ spec:
                       type: object
                     type: array
                 required:
-                - affinity
                 - annotations
                 - container
                 - create
-                - extraEnv
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - serviceAccount
                 - tag
-                - tolerations
                 type: object
               installCRDs:
                 type: boolean
@@ -5233,8 +5206,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -5531,23 +5502,15 @@ spec:
                       type: object
                     type: array
                 required:
-                - affinity
                 - annotations
                 - container
                 - create
                 - envFrom
-                - extraEnv
-                - extraSecretMounts
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - secret
                 - serviceAccount
                 - tag
-                - tolerations
                 type: object
               logLevel:
                 type: string
@@ -6446,8 +6409,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -6622,9 +6583,6 @@ spec:
                         additionalProperties:
                           type: string
                         type: object
-                    required:
-                    - annotations
-                    - labels
                     type: object
                   serviceAccount:
                     properties:
@@ -6695,29 +6653,19 @@ spec:
                             additionalProperties:
                               type: string
                             type: object
-                        required:
-                        - annotations
-                        - labels
                         type: object
                     required:
                     - service
                     type: object
                 required:
-                - affinity
                 - annotations
                 - container
                 - create
-                - extraEnv
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - service
                 - serviceAccount
                 - tag
-                - tolerations
                 - webhookReceiver
                 type: object
               policies:
@@ -7657,8 +7605,6 @@ spec:
                         items:
                           type: string
                         type: array
-                    required:
-                    - additionalArgs
                     type: object
                   create:
                     type: boolean
@@ -7833,9 +7779,6 @@ spec:
                         additionalProperties:
                           type: string
                         type: object
-                    required:
-                    - annotations
-                    - labels
                     type: object
                   serviceAccount:
                     properties:
@@ -7895,21 +7838,13 @@ spec:
                       type: object
                     type: array
                 required:
-                - affinity
-                - annotations
                 - container
                 - create
-                - extraEnv
                 - image
-                - imagePullPolicy
-                - labels
-                - nodeSelector
-                - priorityClassName
                 - resources
                 - service
                 - serviceAccount
                 - tag
-                - tolerations
                 type: object
               watchAllNamespaces:
                 type: boolean
