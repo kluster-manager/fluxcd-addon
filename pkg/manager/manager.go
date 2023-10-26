@@ -15,7 +15,6 @@ import (
 	"open-cluster-management.io/addon-framework/pkg/addonmanager"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	cmdfactory "open-cluster-management.io/addon-framework/pkg/cmd/factory"
-	"open-cluster-management.io/api/addon/v1alpha1"
 	_ "open-cluster-management.io/api/addon/v1alpha1"
 	workapiv1 "open-cluster-management.io/api/work/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -57,9 +56,6 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithConfigGVRs(
 			schema.GroupVersionResource{Group: FluxCDConfigGroup, Version: FluxCDConfigVersion, Resource: FluxCDConfigResource},
 		).
-		WithAgentRegistrationOption(&agentapi.RegistrationOption{AgentInstallNamespace: func(addon *v1alpha1.ManagedClusterAddOn) string {
-			return AddonInstallationNamespace
-		}}).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
 		BuildHelmAgentAddon()
