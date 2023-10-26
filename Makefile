@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/imtiazcho/fluxcd-addon:0.3.1
+IMG ?= docker.io/imtiazcho/fluxcd-addon:0.4.0
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -70,7 +70,8 @@ undeploy-addon: ## Delete deployed manifests from the hub cluster
 	kubectl delete -k deploy/raw --ignore-not-found
 
 .PHONY: deploy-crd
-deploy-crd:
+deploy-crd: ## Apply flux config crd
+	cd api/ && make manifests
 	kustomize build api/config/crd/ | kubectl apply -f -
 
 .PHONY: deploy-addon-all

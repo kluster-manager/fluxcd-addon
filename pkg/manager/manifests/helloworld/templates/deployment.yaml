@@ -16,7 +16,7 @@ spec:
       containers:
         - name: fluxcd
           image: {{ .Values.global.imageOverrides.helloWorldHelm }}
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
           args:
             - "sleep"
             - "3600"

@@ -17,4 +17,4 @@ resources:
 images:
   - name: docker.io/imtiazcho/fluxcd-addon
     newName: docker.io/imtiazcho/fluxcd-addon
-    newTag: 0.3.1
+    newTag: 0.4.0

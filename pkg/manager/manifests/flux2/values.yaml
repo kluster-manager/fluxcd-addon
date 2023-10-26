@@ -28,11 +28,27 @@ cli:
   serviceAccount:
     automount: true
 
+  #manually added
+  resources: []
+  volumeMounts: {}
+  securityContext: {}
+  volumes: {}
+
+
 # controllers
 
 helmController:
   create: true
   image: ghcr.io/fluxcd/helm-controller
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   tag: v0.36.1
   resources:
     limits: {}
@@ -219,6 +235,15 @@ notificationController:
 
 sourceController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: {}
+  securityContext: {}
+  volumeMounts: {}
+  podSecurityContext: {}
+  volumes: {}
+
   image: ghcr.io/fluxcd/source-controller
   tag: v1.1.1
   resources:
@@ -243,6 +268,10 @@ sourceController:
   service:
     labels: {}
     annotations: {}
+
+    #manually added
+    ports: {}
+
   nodeSelector: {}
   affinity: {}
   tolerations: []

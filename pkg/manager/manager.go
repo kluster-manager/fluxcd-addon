@@ -4,10 +4,9 @@ import (
 	"context"
 	"embed"
 	"fmt"
-	"k8s.io/apimachinery/pkg/runtime"
-
 	fluxapi1alpha1 "github.com/kluster-management/fluxcd-addon/api/api/v1alpha1"
 	"github.com/spf13/cobra"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/rest"
 	"k8s.io/component-base/version"
@@ -16,6 +15,7 @@ import (
 	"open-cluster-management.io/addon-framework/pkg/addonmanager"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	cmdfactory "open-cluster-management.io/addon-framework/pkg/cmd/factory"
+	"open-cluster-management.io/api/addon/v1alpha1"
 	_ "open-cluster-management.io/api/addon/v1alpha1"
 	workapiv1 "open-cluster-management.io/api/work/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -27,11 +27,9 @@ import (
 var FS embed.FS
 
 const (
-	AddonName         = "fluxcd-addon"
-	AgentManifestsDir = "manifests/flux2"
-
-	AgentHealthProberName      = "helm-controller"
-	AgentHealthProberNamespace = "flux-system"
+	AddonName                  = "fluxcd-addon"
+	AgentManifestsDir          = "manifests/flux2"
+	AddonInstallationNamespace = "open-cluster-management-agent-addon"
 )
 
 func NewManagerCommand() *cobra.Command {
@@ -59,6 +57,7 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithConfigGVRs(
 			schema.GroupVersionResource{Group: FluxCDConfigGroup, Version: FluxCDConfigVersion, Resource: FluxCDConfigResource},
 		).
+		WithAgentRegistrationOption(&agentapi.RegistrationOption{AgentInstallNamespace: setAddonInstallationNamespace}).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
 		BuildHelmAgentAddon()
@@ -96,8 +95,21 @@ func agentHealthProber() *agentapi.HealthProber {
 					ResourceIdentifier: workapiv1.ResourceIdentifier{
 						Group:     "apps",
 						Resource:  "deployments",
-						Name:      AgentHealthProberName,
-						Namespace: AgentHealthProberNamespace,
+						Name:      "helm-controller",
+						Namespace: AddonInstallationNamespace,
+					},
+					ProbeRules: []workapiv1.FeedbackRule{
+						{
+							Type: workapiv1.WellKnownStatusType,
+						},
+					},
+				},
+				{
+					ResourceIdentifier: workapiv1.ResourceIdentifier{
+						Group:     "apps",
+						Resource:  "deployments",
+						Name:      "source-controller",
+						Namespace: AddonInstallationNamespace,
 					},
 					ProbeRules: []workapiv1.FeedbackRule{
 						{
@@ -125,4 +137,11 @@ func agentHealthProber() *agentapi.HealthProber {
 			},
 		},
 	}
+}
+
+// TODO: don't work
+func setAddonInstallationNamespace(addon *v1alpha1.ManagedClusterAddOn) string {
+	addon.Spec.InstallNamespace = "flux-system"
+
+	return "flux-system"
 }
