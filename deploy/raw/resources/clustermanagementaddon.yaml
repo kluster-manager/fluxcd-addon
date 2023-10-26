@@ -7,13 +7,12 @@ metadata:
 spec:
   addOnMeta:
     displayName: fluxcd-addon
-    description: "fluxcd-addon installs fluxcd in every managed cluster"
+    description: "Installs FluxCD in managed clusters"
   installStrategy:
     type: Placements
     placements:
       - name: fluxcd-global-placement
         namespace: fluxcd-manager
-
   supportedConfigs:
     - group: fluxcd.open-cluster-management.io
       resource: fluxcdconfigs
