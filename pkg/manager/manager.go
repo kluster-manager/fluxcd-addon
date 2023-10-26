@@ -29,7 +29,7 @@ var FS embed.FS
 const (
 	AddonName                  = "fluxcd-addon"
 	AgentManifestsDir          = "manifests/flux2"
-	AddonInstallationNamespace = "open-cluster-management-agent-addon"
+	AddonInstallationNamespace = "flux-system"
 )
 
 func NewManagerCommand() *cobra.Command {
@@ -57,7 +57,9 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithConfigGVRs(
 			schema.GroupVersionResource{Group: FluxCDConfigGroup, Version: FluxCDConfigVersion, Resource: FluxCDConfigResource},
 		).
-		WithAgentRegistrationOption(&agentapi.RegistrationOption{AgentInstallNamespace: setAddonInstallationNamespace}).
+		WithAgentRegistrationOption(&agentapi.RegistrationOption{AgentInstallNamespace: func(addon *v1alpha1.ManagedClusterAddOn) string {
+			return AddonInstallationNamespace
+		}}).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
 		BuildHelmAgentAddon()
@@ -137,11 +139,4 @@ func agentHealthProber() *agentapi.HealthProber {
 			},
 		},
 	}
-}
-
-// TODO: don't work
-func setAddonInstallationNamespace(addon *v1alpha1.ManagedClusterAddOn) string {
-	addon.Spec.InstallNamespace = "flux-system"
-
-	return "flux-system"
 }
