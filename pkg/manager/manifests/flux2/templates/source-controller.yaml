@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
@@ -13,7 +13,7 @@ metadata:
     {{- . | toYaml | nindent 4 }}
     {{- end }}
   name: source-controller
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
 
 spec:
   {{- if kindIs "invalid" .Values.sourceController.replicas }}

@@ -2,9 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: "{{ .Release.Name }}-flux-check"
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
@@ -22,7 +22,7 @@ spec:
       annotations: {{ toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+        app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
         app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
         app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
         app.kubernetes.io/part-of: flux
@@ -34,7 +34,7 @@ spec:
       containers:
       - name: flux-cli
         image: {{ template "template.image" .Values.cli }}
-        command: ["/usr/local/bin/flux", "check",  "--pre", "--namespace", {{ .Release.Namespace }}]
+        command: ["/usr/local/bin/flux", "check",  "--pre", "--namespace", {{ .Values.installationNamespace }}]
         {{- with .Values.cli.resources }}
         resources: {{ toYaml . | nindent 10 }}
         {{- end }}

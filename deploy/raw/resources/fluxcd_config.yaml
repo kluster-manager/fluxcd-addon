@@ -11,7 +11,7 @@ metadata:
   namespace: open-cluster-management
 spec:
   installCRDs: true
-
+  installationNamespace: flux-system
   multitenancy:
     # -- Implement the patches for Multi-tenancy lockdown.
     # See https://fluxcd.io/docs/installation/#multi-tenancy-lockdown

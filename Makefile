@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/rokibulhasan114/fluxcd-addon:0.4.0
+IMG ?= docker.io/imtiazcho/fluxcd-addon:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -39,13 +39,17 @@ help: ## Display this help.
 fmt: ## Run go fmt against code.
 	go fmt ./...
 
+.PHONY: vet
+vet: ## Run go vet against code.
+	go vet ./...
+
 ##@ Build
 .PHONY: build
-build: fmt  ## Build manager binary.
+build: fmt vet ## Build manager binary.
 	GOFLAGS="" CGO_ENABLED=0 go build -o bin/fluxcd-addon cmd/main.go
 
 .PHONY: run
-run: fmt  ## Run a controller from your host.
+run: fmt vet ## Run a controller from your host.
 	go run cmd/main.go
 
 .PHONY: docker-build

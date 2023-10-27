@@ -3,9 +3,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: {{ .Release.Name }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
@@ -16,7 +16,7 @@ metadata:
 spec:
   namespaceSelector:
     matchNames:
-      - {{ .Release.Namespace }}
+      - {{ .Values.installationNamespace }}
   selector:
     matchExpressions:
       - key: app

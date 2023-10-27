@@ -4326,6 +4326,8 @@ spec:
                 type: object
               installCRDs:
                 type: boolean
+              installationNamespace:
+                type: string
               kustomizeController:
                 properties:
                   affinity:
@@ -7855,6 +7857,7 @@ spec:
             - imageAutomationController
             - imageReflectionController
             - installCRDs
+            - installationNamespace
             - kustomizeController
             - logLevel
             - multitenancy

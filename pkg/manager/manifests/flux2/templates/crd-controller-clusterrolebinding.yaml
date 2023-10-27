@@ -4,7 +4,7 @@ kind: ClusterRoleBinding
 metadata:
   name: crd-controller
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
@@ -16,20 +16,20 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: kustomize-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
   - kind: ServiceAccount
     name: helm-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
   - kind: ServiceAccount
     name: source-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
   - kind: ServiceAccount
     name: notification-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
   - kind: ServiceAccount
     name: image-reflector-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
   - kind: ServiceAccount
     name: image-automation-controller
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Values.installationNamespace }}
 {{- end }}

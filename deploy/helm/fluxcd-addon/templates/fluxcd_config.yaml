@@ -1,0 +1,49 @@
+apiVersion: fluxcd.open-cluster-management.io/v1alpha1
+kind: FluxCDConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: fluxcdconfig
+    app.kubernetes.io/instance: fluxcdconfig
+    app.kubernetes.io/part-of: api
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: api
+  name: fluxcdconfig
+  namespace: open-cluster-management
+spec:
+  installCRDs: {{ .Values.installCRDs }}
+  installationNamespace: {{ .Values.installationNamespace }}
+  clusterDomain: {{ .Values.clusterDomain }}
+  multitenancy:
+    {{- toYaml .Values.multitenancy | nindent 4}}
+  cli:
+    {{- toYaml .Values.cli | nindent 4}}
+
+  # controllers
+  helmController:
+    {{- toYaml .Values.helmController | nindent 4}}
+  imageAutomationController:
+    {{- toYaml .Values.imageAutomationController | nindent 4}}
+  imageReflectionController:
+    {{- toYaml .Values.imageReflectionController | nindent 4}}
+  kustomizeController:
+    {{- toYaml .Values.kustomizeController | nindent 4}}
+  notificationController:
+    {{- toYaml .Values.notificationController | nindent 4}}
+  sourceController:
+    {{- toYaml .Values.sourceController | nindent 4}}
+
+
+  policies:
+    {{- toYaml .Values.policies | nindent 4}}
+  rbac:
+    {{- toYaml .Values.rbac | nindent 4}}
+  logLevel: {{ .Values.logLevel }}
+  watchAllNamespaces: {{ .Values.watchAllNamespaces }}
+  # -- contents of pod imagePullSecret in form 'name=[secretName]'; applied to all controllers
+  imagePullSecrets:
+    {{- toYaml .Values.imagePullSecrets | nindent 4}}
+  # -- Array of extra K8s manifests to deploy
+  extraObjects:
+    {{- toYaml .Values.extraObjects | nindent 4}}
+  prometheus:
+    {{- toYaml .Values.prometheus | nindent 4}}
