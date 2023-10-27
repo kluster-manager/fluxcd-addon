@@ -3,13 +3,13 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-egress
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
 
 spec:
   egress:
@@ -26,13 +26,13 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-scraping
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
 
 spec:
   ingress:
@@ -49,13 +49,13 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   labels:
-    app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
+    app.kubernetes.io/instance: {{ .Values.installationNamespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-webhooks
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ .Values.installationNamespace }}
 
 spec:
   ingress:

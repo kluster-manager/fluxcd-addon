@@ -24,6 +24,8 @@ import (
 
 // FluxCDConfigSpec defines the desired state of FluxCDConfig
 type FluxCDConfigSpec struct {
+	//+kubebuilder:validation:default=open-cluster-management-agent-addon
+	InstallationNamespace     string                     `json:"installationNamespace"`
 	InstallCRDs               bool                       `json:"installCRDs"`
 	Multitenancy              Multitenancy               `json:"multitenancy"`
 	ClusterDomain             string                     `json:"clusterDomain"`

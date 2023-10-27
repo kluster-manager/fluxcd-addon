@@ -56,7 +56,6 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithConfigGVRs(
 			schema.GroupVersionResource{Group: FluxCDConfigGroup, Version: FluxCDConfigVersion, Resource: FluxCDConfigResource},
 		).
-		WithInstallStrategy(agentapi.InstallAllStrategy(AddonInstallationNamespace)).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
 		BuildHelmAgentAddon()
