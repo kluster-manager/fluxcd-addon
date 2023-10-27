@@ -39,17 +39,13 @@ help: ## Display this help.
 fmt: ## Run go fmt against code.
 	go fmt ./...
 
-.PHONY: vet
-vet: ## Run go vet against code.
-	go vet ./...
-
 ##@ Build
 .PHONY: build
-build: fmt vet ## Build manager binary.
+build: fmt ## Build manager binary.
 	GOFLAGS="" CGO_ENABLED=0 go build -o bin/fluxcd-addon cmd/main.go
 
 .PHONY: run
-run: fmt vet ## Run a controller from your host.
+run: fmt ## Run a controller from your host.
 	go run cmd/main.go
 
 .PHONY: docker-build
@@ -60,12 +56,12 @@ docker-build: ## Build docker image with the manager.
 docker-push: docker-build ## Build and Push docker image with the manager.
 	docker push ${IMG}
 
-.PHONY: deploy-addon
-deploy-addon: ## Deploy addon manifests to the hub cluster
+.PHONY: deploy-raw-manifests
+deploy-raw: ## Deploy addon manifests to the hub cluster
 	 kustomize build deploy/raw/ | kubectl apply -f -
 
 
-.PHONY: undeploy-addon
+.PHONY: undeploy-raw-manifests
 undeploy-addon: ## Delete deployed manifests from the hub cluster
 	kubectl delete -k deploy/raw --ignore-not-found
 
@@ -74,9 +70,20 @@ deploy-crd: ## Apply flux config crd
 	cd api/ && make manifests
 	kustomize build api/config/crd/ | kubectl apply -f -
 
-.PHONY: deploy-addon-all
+.PHONY: deploy-raw
 deploy-addon-all:
 	make deploy-crd
-	make undeploy-addon
+	make deploy-raw-manifests
 	make docker-push
-	make deploy-addon
+	make undeploy-raw-manifests
+
+
+.PHONY: deploy-helm
+deploy-helm:
+	make docker-push
+	make undeploy-helm --ignore-errors
+	cd deploy/helm/fluxcd-addon && helm install fluxcd-manager .
+
+.PHONY: undeploy-helm
+undeploy-helm:
+	helm uninstall fluxcd-manager
