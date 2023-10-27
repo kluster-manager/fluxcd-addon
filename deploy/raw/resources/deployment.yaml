@@ -18,5 +18,5 @@ spec:
       serviceAccountName: fluxcd-addon-sa
       containers:
         - name: fluxcd-manager
-          image: docker.io/imtiazcho/fluxcd-addon
+          image: docker.io/rokibulhasan114/fluxcd-addon
           imagePullPolicy: Always
