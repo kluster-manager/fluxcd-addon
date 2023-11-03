@@ -1,4 +1,4 @@
-# Fluxcd global config
+# global
 
 installCRDs: true
 
@@ -21,21 +21,37 @@ clusterDomain: cluster.local
 cli:
   image: ghcr.io/fluxcd/flux-cli
   tag: v2.1.1
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
-  annotations: { }
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  annotations: {}
   serviceAccount:
     automount: true
+
+  #manually added
+  resources: []
+  volumeMounts: {}
+  securityContext: {}
+  volumes: {}
+
 
 # controllers
 
 helmController:
   create: true
   image: ghcr.io/fluxcd/helm-controller
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   tag: v0.36.1
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -45,17 +61,16 @@ helmController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels:
-    "byte.builders/managed": "true"
+  labels: {}
   container:
-    additionalArgs: [ ]
-  extraEnv: [ ]
+    additionalArgs: []
+  extraEnv: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
-  nodeSelector: { }
+  nodeSelector: {}
   # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#affinity-v1-core
   # for example:
   #   affinity:
@@ -68,7 +83,7 @@ helmController:
   #            values:
   #            - master
 
-  affinity: { }
+  affinity: {}
   # expects input structure as per specification https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.11/#toleration-v1-core
   # for example:
   #   tolerations:
@@ -77,14 +92,14 @@ helmController:
   #     value: master
   #     effect: NoSchedule
 
-  tolerations: [ ]
+  tolerations: []
 
 imageAutomationController:
-  create: false
+  create: true
   image: ghcr.io/fluxcd/image-automation-controller
   tag: v0.36.1
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -94,25 +109,25 @@ imageAutomationController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels: { }
+  labels: {}
   container:
-    additionalArgs: [ ]
-  extraEnv: [ ]
+    additionalArgs: []
+  extraEnv: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 imageReflectionController:
-  create: false
+  create: true
   image: ghcr.io/fluxcd/image-reflector-controller
   tag: v0.30.0
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -122,25 +137,25 @@ imageReflectionController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels: { }
+  labels: {}
   container:
-    additionalArgs: [ ]
-  extraEnv: [ ]
+    additionalArgs: []
+  extraEnv: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 kustomizeController:
-  create: false
+  create: true
   image: ghcr.io/fluxcd/kustomize-controller
   tag: v1.1.0
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -150,20 +165,20 @@ kustomizeController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels: { }
+  labels: {}
   container:
-    additionalArgs: [ ]
-  extraEnv: [ ]
+    additionalArgs: []
+  extraEnv: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
   secret:
     # -- Create a secret to use it with extraSecretMounts. Defaults to false.
     create: false
     name: ""
-    data: { }
+    data: {}
   # -- Defines envFrom using a configmap and/or secret.
   envFrom:
     map:
@@ -172,23 +187,23 @@ kustomizeController:
       name: ""
   # -- Defines additional mounts with secrets.
   # Secrets must be manually created in the namespace or with kustomizeController.secret
-  extraSecretMounts: [ ]
+  extraSecretMounts: []
   # - name: secret-files
   #   mountPath: /etc/secrets
   #   subPath: ""
   #   secretName: secret-files
   #   readOnly: true
 
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 notificationController:
-  create: false
+  create: true
   image: ghcr.io/fluxcd/notification-controller
   tag: v1.1.0
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -198,32 +213,41 @@ notificationController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels: { }
+  labels: {}
   container:
-    additionalArgs: [ ]
-  extraEnv: [ ]
+    additionalArgs: []
+  extraEnv: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
   service:
-    labels: { }
-    annotations: { }
+    labels: {}
+    annotations: {}
   webhookReceiver:
     service:
-      labels: { }
-      annotations: { }
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
+      labels: {}
+      annotations: {}
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 sourceController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: {}
+  securityContext: {}
+  volumeMounts: {}
+  podSecurityContext: {}
+  volumes: {}
+
   image: ghcr.io/fluxcd/source-controller
   tag: v1.1.1
   resources:
-    limits: { }
+    limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
@@ -233,22 +257,25 @@ sourceController:
   annotations:
     prometheus.io/port: "8080"
     prometheus.io/scrape: "true"
-  labels:
-    "byte.builders/managed": "true"
+  labels: {}
   container:
-    additionalArgs: [ ]
+    additionalArgs: []
   serviceAccount:
     create: true
     automount: true
-    annotations: { }
+    annotations: {}
   imagePullPolicy: ""
   service:
-    labels: { }
-    annotations: { }
-  nodeSelector: { }
-  affinity: { }
-  tolerations: [ ]
-  extraEnv: [ ]
+    labels: {}
+    annotations: {}
+
+    #manually added
+    ports: {}
+
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  extraEnv: []
 
 policies:
   create: true
@@ -262,10 +289,10 @@ logLevel: info
 watchAllNamespaces: true
 
 # -- contents of pod imagePullSecret in form 'name=[secretName]'; applied to all controllers
-imagePullSecrets: [ ]
+imagePullSecrets: []
 
 # -- Array of extra K8s agent-manifests to deploy
-extraObjects: [ ]
+extraObjects: []
 # Example usage from https://fluxcd.io/docs/components/source/buckets/#static-authentication
 # - apiVersion: source.toolkit.fluxcd.io/v1beta2
 #   kind: Bucket
@@ -299,6 +326,7 @@ prometheus:
       - port: http-prom
         relabelings:
           # https://github.com/prometheus-operator/prometheus-operator/issues/4816
-          - sourceLabels: [ __meta_kubernetes_pod_phase ]
+          - sourceLabels: [__meta_kubernetes_pod_phase]
             action: keep
             regex: Running
+

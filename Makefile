@@ -60,7 +60,6 @@ docker-push: docker-build ## Build and Push docker image with the manager.
 deploy-raw: ## Deploy addon manifests to the hub cluster
 	 kustomize build deploy/raw/ | kubectl apply -f -
 
-
 .PHONY: undeploy-raw-manifests
 undeploy-addon: ## Delete deployed manifests from the hub cluster
 	kubectl delete -k deploy/raw --ignore-not-found
@@ -82,6 +81,7 @@ deploy-addon-all:
 deploy-helm:
 	make docker-push
 	make undeploy-helm --ignore-errors
+	make deploy-crd --ignore-errors
 	cd deploy/helm/fluxcd-addon && helm install fluxcd-manager .
 
 .PHONY: undeploy-helm
