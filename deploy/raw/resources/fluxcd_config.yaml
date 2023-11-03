@@ -274,7 +274,7 @@ spec:
   # -- contents of pod imagePullSecret in form 'name=[secretName]'; applied to all controllers
   imagePullSecrets: [ ]
 
-  # -- Array of extra K8s manifests to deploy
+  # -- Array of extra K8s agent-manifests to deploy
   extraObjects: [ ]
   # Example usage from https://fluxcd.io/docs/components/source/buckets/#static-authentication
   # - apiVersion: source.toolkit.fluxcd.io/v1beta2

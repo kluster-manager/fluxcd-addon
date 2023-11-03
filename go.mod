@@ -11,8 +11,8 @@ require (
 	k8s.io/component-base v0.26.7
 	k8s.io/klog/v2 v2.100.1
 	kmodules.xyz/schema-checker v0.4.1
-	open-cluster-management.io/addon-framework v0.8.0
-	open-cluster-management.io/api v0.12.0
+	open-cluster-management.io/addon-framework v0.8.1-0.20231102082339-51742bc299f2
+	open-cluster-management.io/api v0.12.1-0.20231027024433-bab1208e6889
 	sigs.k8s.io/controller-runtime v0.14.4
 )
 
