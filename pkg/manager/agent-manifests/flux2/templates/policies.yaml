@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-egress
-  namespace: {{ .Release.Namespace }}
 spec:
   egress:
   - {}
@@ -31,7 +30,6 @@ metadata:
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-scraping
-  namespace: {{ .Release.Namespace }}
 spec:
   ingress:
   - from:
@@ -53,7 +51,6 @@ metadata:
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: allow-webhooks
-  namespace: {{ .Release.Namespace }}
 spec:
   ingress:
   - from:
