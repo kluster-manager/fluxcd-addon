@@ -20,7 +20,7 @@ clusterDomain: cluster.local
 
 cli:
   image: ghcr.io/fluxcd/flux-cli
-  tag: v2.1.1
+  tag: v2.1.2
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -28,28 +28,12 @@ cli:
   serviceAccount:
     automount: true
 
-  #manually added
-  resources: []
-  volumeMounts: {}
-  securityContext: {}
-  volumes: {}
-
-
 # controllers
 
 helmController:
   create: true
   image: ghcr.io/fluxcd/helm-controller
-
-  # manually added
-  replicas: 1
-  initContainers: { }
-  securityContext: { }
-  volumeMounts: { }
-  podSecurityContext: { }
-  volumes: { }
-
-  tag: v0.36.1
+  tag: v0.36.2
   resources:
     limits: {}
     # cpu: 1000m
@@ -153,7 +137,7 @@ imageReflectionController:
 kustomizeController:
   create: true
   image: ghcr.io/fluxcd/kustomize-controller
-  tag: v1.1.0
+  tag: v1.1.1
   resources:
     limits: {}
     # cpu: 1000m
@@ -235,17 +219,8 @@ notificationController:
 
 sourceController:
   create: true
-
-  # manually added
-  replicas: 1
-  initContainers: {}
-  securityContext: {}
-  volumeMounts: {}
-  podSecurityContext: {}
-  volumes: {}
-
   image: ghcr.io/fluxcd/source-controller
-  tag: v1.1.1
+  tag: v1.1.2
   resources:
     limits: {}
     # cpu: 1000m
@@ -268,10 +243,6 @@ sourceController:
   service:
     labels: {}
     annotations: {}
-
-    #manually added
-    ports: {}
-
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -291,7 +262,7 @@ watchAllNamespaces: true
 # -- contents of pod imagePullSecret in form 'name=[secretName]'; applied to all controllers
 imagePullSecrets: []
 
-# -- Array of extra K8s agent-manifests to deploy
+# -- Array of extra K8s manifests to deploy
 extraObjects: []
 # Example usage from https://fluxcd.io/docs/components/source/buckets/#static-authentication
 # - apiVersion: source.toolkit.fluxcd.io/v1beta2
@@ -329,4 +300,3 @@ prometheus:
           - sourceLabels: [__meta_kubernetes_pod_phase]
             action: keep
             regex: Running
-

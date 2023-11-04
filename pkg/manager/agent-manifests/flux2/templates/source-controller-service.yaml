@@ -14,8 +14,6 @@ metadata:
   {{- with .Values.sourceController.service.annotations }}
   annotations: {{ toYaml . | nindent 4 }}
   {{- end }}
-
-  namespace: {{ .Release.Namespace }}
 spec:
   ports:
   - name: http
