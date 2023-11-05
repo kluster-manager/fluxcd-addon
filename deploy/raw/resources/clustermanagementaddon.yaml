@@ -12,5 +12,5 @@ spec:
     - group: fluxcd.open-cluster-management.io
       resource: fluxcdconfigs
       defaultConfig:
-        name: fluxcdconfig-sample
+        name: fluxcdconfig
         namespace: open-cluster-management

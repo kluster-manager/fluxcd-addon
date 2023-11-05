@@ -7,6 +7,23 @@ metadata:
     app.kubernetes.io/part-of: api
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: api
-  name: fluxcdconfig-sample
+  name: fluxcdconfig
+  namespace: open-cluster-management
 spec:
-  # TODO(user): Add fields here
+  installCRDs: true
+  helmController:
+    create: true
+    labels:
+      ace.appscode.com/managed: "true"
+  sourceController:
+    create: true
+    labels:
+      ace.appscode.com/managed: "true"
+  imageAutomationController:
+    create: false
+  imageReflectionController:
+    create: false
+  kustomizeController:
+    create: false
+  notificationController:
+    create: false
