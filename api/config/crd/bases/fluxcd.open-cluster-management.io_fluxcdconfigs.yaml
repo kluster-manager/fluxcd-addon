@@ -909,7 +909,6 @@ spec:
                       type: string
                     type: object
                   image:
-                    default: ghcr.io/fluxcd/flux-cli
                     type: string
                   nodeSelector:
                     additionalProperties:
@@ -918,13 +917,9 @@ spec:
                   serviceAccount:
                     properties:
                       automount:
-                        default: true
                         type: boolean
-                    required:
-                    - automount
                     type: object
                   tag:
-                    default: v2.1.1
                     type: string
                   tolerations:
                     items:
@@ -966,14 +961,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                required:
-                - affinity
-                - annotations
-                - image
-                - nodeSelector
-                - serviceAccount
-                - tag
-                - tolerations
                 type: object
               clusterDomain:
                 type: string
@@ -2037,8 +2024,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -2084,13 +2069,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - annotations
-                - container
                 - create
-                - image
-                - resources
-                - serviceAccount
-                - tag
                 type: object
               imageAutomationController:
                 properties:
@@ -3147,8 +3126,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -3194,13 +3171,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - annotations
-                - container
                 - create
-                - image
-                - resources
-                - serviceAccount
-                - tag
                 type: object
               imagePullSecrets:
                 items:
@@ -4269,8 +4240,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -4316,13 +4285,7 @@ spec:
                       type: object
                     type: array
                 required:
-                - annotations
-                - container
                 - create
-                - image
-                - resources
-                - serviceAccount
-                - tag
                 type: object
               installCRDs:
                 type: boolean
@@ -5225,9 +5188,6 @@ spec:
                               TODO: Add other useful fields. apiVersion, kind, uid?'
                             type: string
                         type: object
-                    required:
-                    - map
-                    - secret
                     type: object
                   extraEnv:
                     items:
@@ -5441,8 +5401,6 @@ spec:
                         type: string
                     required:
                     - create
-                    - data
-                    - name
                     type: object
                   serviceAccount:
                     properties:
@@ -5455,8 +5413,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -5502,32 +5458,18 @@ spec:
                       type: object
                     type: array
                 required:
-                - annotations
-                - container
                 - create
-                - envFrom
-                - image
-                - resources
-                - secret
-                - serviceAccount
-                - tag
                 type: object
               logLevel:
                 type: string
               multitenancy:
                 properties:
                   defaultServiceAccount:
-                    default: default
                     type: string
                   enabled:
                     type: boolean
                   privileged:
-                    default: true
                     type: boolean
-                required:
-                - defaultServiceAccount
-                - enabled
-                - privileged
                 type: object
               notificationController:
                 properties:
@@ -6595,8 +6537,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -6654,19 +6594,9 @@ spec:
                               type: string
                             type: object
                         type: object
-                    required:
-                    - service
                     type: object
                 required:
-                - annotations
-                - container
                 - create
-                - image
-                - resources
-                - service
-                - serviceAccount
-                - tag
-                - webhookReceiver
                 type: object
               policies:
                 properties:
@@ -6697,23 +6627,13 @@ spec:
                                     items:
                                       type: string
                                     type: array
-                                required:
-                                - action
-                                - regex
-                                - sourceLabels
                                 type: object
                               type: array
-                          required:
-                          - port
-                          - relabelings
                           type: object
                         type: array
                     required:
                     - create
-                    - podMetricsEndpoints
                     type: object
-                required:
-                - podMonitor
                 type: object
               rbac:
                 properties:
@@ -6723,7 +6643,6 @@ spec:
                     type: boolean
                 required:
                 - create
-                - createAggregation
                 type: object
               sourceController:
                 properties:
@@ -7791,8 +7710,6 @@ spec:
                       create:
                         type: boolean
                     required:
-                    - annotations
-                    - automount
                     - create
                     type: object
                   tag:
@@ -7838,32 +7755,12 @@ spec:
                       type: object
                     type: array
                 required:
-                - container
                 - create
-                - image
-                - resources
-                - service
-                - serviceAccount
-                - tag
                 type: object
               watchAllNamespaces:
                 type: boolean
             required:
-            - cli
-            - clusterDomain
-            - helmController
-            - imageAutomationController
-            - imageReflectionController
             - installCRDs
-            - kustomizeController
-            - logLevel
-            - multitenancy
-            - notificationController
-            - policies
-            - prometheus
-            - rbac
-            - sourceController
-            - watchAllNamespaces
             type: object
         required:
         - metadata
