@@ -2,7 +2,7 @@ module github.com/kluster-management/fluxcd-addon
 
 go 1.20
 
-replace open-cluster-management.io/addon-framework => github.com/kluster-management/addon-framework v0.8.1-0.20231105001724-603a85f6b697
+replace open-cluster-management.io/addon-framework => github.com/kluster-management/addon-framework v0.8.1-0.20231105031231-5294acb46542
 
 require (
 	github.com/spf13/cobra v1.7.0
