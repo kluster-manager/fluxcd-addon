@@ -15,7 +15,7 @@ spec:
       labels:
         app: fluxcd-manager
     spec:
-      serviceAccountName: fluxcd-addon-sa
+      serviceAccountName: fluxcd-addon-manager
       containers:
         - name: fluxcd-manager
           image: docker.io/imtiazcho/fluxcd-addon:latest
