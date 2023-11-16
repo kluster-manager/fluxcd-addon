@@ -1,7 +1,7 @@
 FROM golang:latest AS builder
 WORKDIR /fluxcd-addon
 COPY . .
-ENV GO_PACKAGE github.com/kluster-management/fluxcd-addon
+ENV GO_PACKAGE github.com/kluster-manager/fluxcd-addon
 
 # Build
 RUN make build --warn-undefined-variables

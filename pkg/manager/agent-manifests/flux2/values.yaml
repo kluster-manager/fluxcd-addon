@@ -28,11 +28,27 @@ cli:
   serviceAccount:
     automount: true
 
+  #manually added
+  resources: []
+  volumeMounts: {}
+  securityContext: {}
+  volumes: {}
+
+
 # controllers
 
 helmController:
   create: true
   image: ghcr.io/fluxcd/helm-controller
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   tag: v0.36.2
   resources:
     limits: {}
@@ -80,6 +96,15 @@ helmController:
 
 imageAutomationController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   image: ghcr.io/fluxcd/image-automation-controller
   tag: v0.36.1
   resources:
@@ -108,6 +133,15 @@ imageAutomationController:
 
 imageReflectionController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   image: ghcr.io/fluxcd/image-reflector-controller
   tag: v0.30.0
   resources:
@@ -136,6 +170,15 @@ imageReflectionController:
 
 kustomizeController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   image: ghcr.io/fluxcd/kustomize-controller
   tag: v1.1.1
   resources:
@@ -184,6 +227,15 @@ kustomizeController:
 
 notificationController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: { }
+  securityContext: { }
+  volumeMounts: { }
+  podSecurityContext: { }
+  volumes: { }
+
   image: ghcr.io/fluxcd/notification-controller
   tag: v1.1.0
   resources:
@@ -209,6 +261,8 @@ notificationController:
   service:
     labels: {}
     annotations: {}
+    #manually added
+    ports: { }
   webhookReceiver:
     service:
       labels: {}
@@ -219,6 +273,15 @@ notificationController:
 
 sourceController:
   create: true
+
+  # manually added
+  replicas: 1
+  initContainers: {}
+  securityContext: {}
+  volumeMounts: {}
+  podSecurityContext: {}
+  volumes: {}
+
   image: ghcr.io/fluxcd/source-controller
   tag: v1.1.2
   resources:
@@ -243,6 +306,10 @@ sourceController:
   service:
     labels: {}
     annotations: {}
+
+    #manually added
+    ports: {}
+
   nodeSelector: {}
   affinity: {}
   tolerations: []

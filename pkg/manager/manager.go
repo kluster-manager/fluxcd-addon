@@ -3,7 +3,7 @@ package manager
 import (
 	"context"
 	"embed"
-	fluxapi1alpha1 "github.com/kluster-management/fluxcd-addon/api/api/v1alpha1"
+	fluxapi1alpha1 "github.com/kluster-manager/fluxcd-addon/api/api/v1alpha1"
 	"github.com/spf13/cobra"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -26,7 +26,7 @@ var FS embed.FS
 
 const (
 	// AddonName represents the name of the FluxCD addon.
-	AddonName = "fluxcd-addon"
+	AddonName = "fluxcd-addon-manager"
 
 	// AgentManifestsDir is the directory containing Flux2 agent-manifests.
 	AgentManifestsDir = "agent-manifests/flux2"

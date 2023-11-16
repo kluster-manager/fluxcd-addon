@@ -14,6 +14,7 @@ metadata:
     {{- . | toYaml | nindent 4 }}
     {{- end }}
   name: helm-controller
+  namespace: {{ .Release.Namespace }}
 spec:
   {{- if kindIs "invalid" .Values.helmController.replicas }}
   replicas: 1
