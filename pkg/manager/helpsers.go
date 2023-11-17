@@ -3,7 +3,7 @@ package manager
 import (
 	"context"
 	"fmt"
-	fluxcnfv1alpha "github.com/kluster-management/fluxcd-addon/api/api/v1alpha1"
+	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/api/api/v1alpha1"
 	"k8s.io/apimachinery/pkg/types"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
