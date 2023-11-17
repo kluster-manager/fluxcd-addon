@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: fluxcd-manager
+  name: fluxcd-addon-manager
   namespace: open-cluster-management
   labels:
-    app: fluxcd-manager
+    app: fluxcd-addon-manager
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fluxcd-manager
+      app: fluxcd-addon-manager
   template:
     metadata:
       labels:
-        app: fluxcd-manager
+        app: fluxcd-addon-manager
     spec:
       serviceAccountName: fluxcd-addon-manager
       containers:
-        - name: fluxcd-manager
-          image: docker.io/imtiazcho/fluxcd-addon:latest
+        - name: fluxcd-addon-manager
+          image: docker.io/rokibulhasan114/fluxcd-addon:latest
           imagePullPolicy: Always

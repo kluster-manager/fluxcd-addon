@@ -20,7 +20,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/kluster-management/fluxcd-addon/api/api/v1alpha1"
+	"github.com/kluster-manager/fluxcd-addon/api/api/v1alpha1"
 
 	sc "kmodules.xyz/schema-checker"
 )

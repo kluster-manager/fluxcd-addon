@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/imtiazcho/fluxcd-addon:latest
+IMG ?= docker.io/rokibulhasan114/fluxcd-addon:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -82,8 +82,8 @@ deploy-helm:
 	make docker-push
 	make undeploy-helm --ignore-errors
 	make deploy-crd --ignore-errors
-	cd deploy/helm/fluxcd-addon && helm install fluxcd-manager .
+	cd deploy/helm/fluxcd-addon-manager && helm install fluxcd-addon-manager . --namespace flux-system --create-namespace \
 
 .PHONY: undeploy-helm
 undeploy-helm:
-	helm uninstall fluxcd-manager
+	helm uninstall fluxcd-addon-manager -n flux-system
