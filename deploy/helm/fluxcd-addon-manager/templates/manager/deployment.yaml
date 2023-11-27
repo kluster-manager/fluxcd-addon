@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: fluxcd-addon-manager
-  namespace: open-cluster-management
+  namespace: fluxcd-addon
   labels:
     app: fluxcd-addon-manager
 spec:
