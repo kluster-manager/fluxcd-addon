@@ -1,5 +1,5 @@
 # Image URL to use all building/pushing image targets
-IMG ?= docker.io/rokibulhasan114/fluxcd-addon:latest
+IMG ?= ghcr.io/kluster-manager/fluxcd-addon:latest
 
 # Get the currently used golang install path (in GOPATH/bin, unless GOBIN is set)
 ifeq (,$(shell go env GOBIN))
@@ -85,6 +85,7 @@ deploy-addon-all:
 deploy-helm:
 	make docker-push-to-kind
 	make undeploy-helm --ignore-errors
+	kubectl wait --for=delete namespace/fluxcd-addon --timeout=300s
 	make deploy-crd --ignore-errors
 	cd deploy/helm/fluxcd-addon-manager && helm install fluxcd-addon-manager . --namespace flux-system --create-namespace \
 
