@@ -14,6 +14,6 @@ resources:
   - resources/deployment.yaml
 
 images:
-  - name: docker.io/rokibulhasan114/fluxcd-addon
-    newName: docker.io/rokibulhasan114/fluxcd-addon
+  - name: ghcr.io/kluster-manager/fluxcd-addon
+    newName: ghcr.io/kluster-manager/fluxcd-addon
     newTag: 0.4.0
