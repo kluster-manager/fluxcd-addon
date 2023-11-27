@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/part-of: api
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: api
-  name: fluxcdconfig
-  namespace: open-cluster-management
+  name: fluxcd-config
+  namespace: fluxcd-addon
 spec:
   installCRDs: {{ .Values.installCRDs }}
   clusterDomain: {{ .Values.clusterDomain }}
