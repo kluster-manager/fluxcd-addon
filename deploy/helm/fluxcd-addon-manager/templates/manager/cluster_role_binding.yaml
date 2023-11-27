@@ -9,4 +9,4 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: fluxcd-addon-manager
-    namespace: open-cluster-management
+    namespace: fluxcd-addon

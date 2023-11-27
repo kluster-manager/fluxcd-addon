@@ -18,6 +18,7 @@ package v1alpha1
 
 import (
 	core "k8s.io/api/core/v1"
+	networking "k8s.io/api/networking/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -25,6 +26,8 @@ import (
 // FluxCDConfigSpec defines the desired state of FluxCDConfig
 type FluxCDConfigSpec struct {
 	InstallCRDs bool `json:"installCRDs"`
+	// +optional
+	CRDs CRDsSpec `json:"crds"`
 	// +optional
 	Multitenancy Multitenancy `json:"multitenancy"`
 	// +optional
@@ -57,6 +60,11 @@ type FluxCDConfigSpec struct {
 	ExtraObjects []runtime.RawExtension `json:"extraObjects"`
 	// +optional
 	Prometheus PrometheusSpec `json:"prometheus"`
+}
+
+type CRDsSpec struct {
+	// +optional
+	Annotations map[string]string `json:"annotations"`
 }
 
 type Multitenancy struct {
@@ -204,6 +212,26 @@ type NotificationControllerSpec struct {
 type WebhookReceiverSpec struct {
 	// +optional
 	Service ServiceSpec `json:"service"`
+	// +optional
+	Ingress IngressSpec `json:"ingress"`
+}
+
+type IngressSpec struct {
+	Create      bool                    `json:"create"`
+	Annotations map[string]string       `json:"annotations"`
+	Labels      map[string]string       `json:"labels"`
+	Hosts       []IngressRule           `json:"hosts"`
+	TLS         []networking.IngressTLS `json:"tls"`
+}
+
+type IngressRule struct {
+	Host  string            `json:"host"`
+	Paths []HTTPIngressPath `json:"paths"`
+}
+
+type HTTPIngressPath struct {
+	Path     string `json:"path"`
+	PathType string `json:"pathType"`
 }
 
 type SourceControllerSpec struct {
@@ -296,6 +324,8 @@ type Rbac struct {
 	Create bool `json:"create"`
 	// +optional
 	CreateAggregation bool `json:"createAggregation"`
+	// +optional
+	Annotations map[string]string `json:"annotations"`
 }
 
 type PrometheusSpec struct {
