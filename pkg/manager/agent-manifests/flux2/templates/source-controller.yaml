@@ -14,6 +14,7 @@ metadata:
     {{- . | toYaml | nindent 4 }}
     {{- end }}
   name: source-controller
+  namespace: {{ .Release.Namespace }}
 spec:
   {{- if kindIs "invalid" .Values.sourceController.replicas }}
   replicas: 1
