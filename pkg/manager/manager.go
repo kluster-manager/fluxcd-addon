@@ -26,7 +26,7 @@ var FS embed.FS
 
 const (
 	// AddonName represents the name of the FluxCD addon.
-	AddonName = "fluxcd-addon-manager"
+	AddonName = "fluxcd-addon"
 
 	// AgentManifestsDir is the directory containing Flux2 agent-manifests.
 	AgentManifestsDir = "agent-manifests/flux2"

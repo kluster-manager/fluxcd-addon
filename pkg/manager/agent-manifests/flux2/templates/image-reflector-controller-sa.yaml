@@ -11,6 +11,7 @@ metadata:
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
   name: image-reflector-controller
+  namespace: {{ .Release.Namespace }}
   {{- with .Values.imageReflectionController.serviceAccount.annotations }}
   annotations: {{ toYaml . | nindent 4 }}
   {{- end }}
