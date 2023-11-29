@@ -80,15 +80,22 @@ deploy-addon-all:
 	make docker-push-to-kind
 	make undeploy-raw-manifests
 
-
 .PHONY: deploy-helm
 deploy-helm:
+	make docker-push
+	make undeploy-helm --ignore-errors
+	kubectl wait --for=delete namespace/fluxcd-addon --timeout=300s
+	make deploy-crd --ignore-errors
+	cd deploy/helm/fluxcd-addon-manager && helm upgrade -i fluxcd-addon-manager . --namespace open-cluster-management --create-namespace \
+
+.PHONY: deploy-to-kind
+deploy-to-kind:
 	make docker-push-to-kind
 	make undeploy-helm --ignore-errors
 	kubectl wait --for=delete namespace/fluxcd-addon --timeout=300s
 	make deploy-crd --ignore-errors
-	cd deploy/helm/fluxcd-addon-manager && helm install fluxcd-addon-manager . --namespace flux-system --create-namespace \
+	cd deploy/helm/fluxcd-addon-manager && helm upgrade -i fluxcd-addon-manager . --namespace open-cluster-management --create-namespace \
 
 .PHONY: undeploy-helm
 undeploy-helm:
-	helm uninstall fluxcd-addon-manager -n flux-system
+	helm uninstall fluxcd-addon-manager -n open-cluster-management
