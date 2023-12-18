@@ -16,11 +16,7 @@ metadata:
   name: source-controller
   namespace: {{ .Release.Namespace }}
 spec:
-  {{- if kindIs "invalid" .Values.sourceController.replicas }}
   replicas: 1
-  {{- else }}
-  replicas: {{ .Values.sourceController.replicas  }}
-  {{- end}}
   selector:
     matchLabels:
       app: source-controller
