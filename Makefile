@@ -29,7 +29,7 @@ CODE_GENERATOR_IMAGE ?= ghcr.io/appscode/gengo:release-1.29
 API_GROUPS           ?= fluxcd:v1alpha1
 
 # Where to push the docker image.
-REGISTRY ?= ghcr.io/appscode
+REGISTRY ?= ghcr.io/kluster-manager
 SRC_REG  ?=
 
 # This version-strategy uses git tags to set the version string
@@ -519,7 +519,7 @@ clean:
 
 .PHONY: run
 run:
-	go run -mod=vendor ./cmd/sidekick run \
+	go run -mod=vendor ./cmd/fluxcd-addon run \
 		--v=3 \
 		--secure-port=8443 \
 		--kubeconfig=$(KUBECONFIG) \
