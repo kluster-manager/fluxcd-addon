@@ -97,7 +97,7 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithCreateAgentInstallNamespace().
 		BuildHelmAgentAddon()
 	if err != nil {
-		klog.Error("Failed to build agent: `%v`", err)
+		klog.Errorf("Failed to build agent: `%v`", err)
 		return err
 	}
 
@@ -106,7 +106,10 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		return err
 	}
 
-	go mgr.Start(ctx)
+	err = mgr.Start(ctx)
+	if err != nil {
+		return err
+	}
 	<-ctx.Done()
 
 	return nil
