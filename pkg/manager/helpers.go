@@ -19,8 +19,8 @@ package manager
 import (
 	"context"
 	"fmt"
-
 	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
+	"sigs.k8s.io/yaml"
 
 	"k8s.io/apimachinery/pkg/types"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
@@ -70,7 +70,20 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 			overrideValues = addonfactory.MergeValues(overrideValues, values)
 		}
 
-		return overrideValues, nil
+		data, err := FS.ReadFile("agent-manifests/flux2/values.yaml")
+		if err != nil {
+			return nil, err
+		}
+
+		var defaultValues map[string]any
+		err = yaml.Unmarshal(data, &defaultValues)
+		if err != nil {
+			return nil, err
+		}
+
+		configValues := addonfactory.MergeValues(defaultValues, overrideValues)
+
+		return configValues, nil
 	}
 }
 

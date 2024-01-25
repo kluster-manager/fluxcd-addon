@@ -37,9 +37,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-//go:embed agent-manifests
-//go:embed agent-manifests/flux2
-//go:embed agent-manifests/flux2/templates/_helper.tpl
+//go:embed all:agent-manifests
 var FS embed.FS
 
 const (
