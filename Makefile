@@ -148,6 +148,7 @@ version:
 .PHONY: clientset
 clientset:
 	@docker run --rm                                            \
+		-u $$(id -u):$$(id -g)                                    \
 		-v /tmp:/.cache                                           \
 		-v $$(pwd):$(DOCKER_REPO_ROOT)                            \
 		-w $(DOCKER_REPO_ROOT)                                    \
@@ -486,7 +487,7 @@ check-license:
 		ltag -t "./hack/license" --excludes "vendor contrib bin" --check -v
 
 .PHONY: ci
-ci: check-license lint build #unit-tests cover verify
+ci: check-license verify lint build unit-tests #cover verify
 
 .PHONY: qa
 qa:

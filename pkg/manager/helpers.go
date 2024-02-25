@@ -23,12 +23,14 @@ import (
 	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
 
 	"k8s.io/apimachinery/pkg/types"
+	"kubepack.dev/lib-helm/pkg/values"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	"open-cluster-management.io/api/addon/v1alpha1"
 	clusterv1 "open-cluster-management.io/api/cluster/v1"
 	workapiv1 "open-cluster-management.io/api/work/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/yaml"
 )
 
 const (
@@ -56,21 +58,32 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 			}
 
 			fluxCDConfig := fluxcnfv1alpha.FluxCDConfig{}
-			keyType := types.NamespacedName{Name: refConfig.Name, Namespace: refConfig.Namespace}
-
-			if err := kc.Get(context.TODO(), keyType, &fluxCDConfig); err != nil {
+			key := types.NamespacedName{Name: refConfig.Name, Namespace: refConfig.Namespace}
+			if err := kc.Get(context.TODO(), key, &fluxCDConfig); err != nil {
 				return nil, err
 			}
 
-			fluxCDConfigSpec := fluxCDConfig.Spec
-			values, err := addonfactory.JsonStructToValues(fluxCDConfigSpec)
+			vals, err := values.GetValuesDiff(fluxcnfv1alpha.FluxCDConfigSpec{}, fluxCDConfig.Spec)
 			if err != nil {
 				return nil, err
 			}
-			overrideValues = addonfactory.MergeValues(overrideValues, values)
+			overrideValues = addonfactory.MergeValues(overrideValues, vals)
 		}
 
-		return overrideValues, nil
+		data, err := FS.ReadFile("agent-manifests/flux2/values.yaml")
+		if err != nil {
+			return nil, err
+		}
+
+		var defaultValues map[string]any
+		err = yaml.Unmarshal(data, &defaultValues)
+		if err != nil {
+			return nil, err
+		}
+
+		configValues := addonfactory.MergeValues(defaultValues, overrideValues)
+
+		return configValues, nil
 	}
 }
 
