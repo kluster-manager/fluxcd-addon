@@ -27,251 +27,251 @@ import (
 type FluxCDConfigSpec struct {
 	InstallCRDs bool `json:"installCRDs"`
 	// +optional
-	CRDs CRDsSpec `json:"crds,omitempty"`
+	CRDs CRDsSpec `json:"crds"`
 	// +optional
-	Multitenancy Multitenancy `json:"multitenancy,omitempty"`
+	Multitenancy Multitenancy `json:"multitenancy"`
 	// +optional
-	ClusterDomain string `json:"clusterDomain,omitempty"`
+	ClusterDomain string `json:"clusterDomain"`
 	// +optional
-	Cli CliSpec `json:"cli,omitempty"`
+	Cli CliSpec `json:"cli"`
 	// +optional
-	HelmController ControllerSpec `json:"helmController,omitempty"`
+	HelmController ControllerSpec `json:"helmController"`
 	// +optional
-	ImageAutomationController ControllerSpec `json:"imageAutomationController,omitempty"`
+	ImageAutomationController ControllerSpec `json:"imageAutomationController"`
 	// +optional
-	ImageReflectionController ControllerSpec `json:"imageReflectionController,omitempty"`
+	ImageReflectionController ControllerSpec `json:"imageReflectionController"`
 	// +optional
-	KustomizeController KustomizeControllerSpec `json:"kustomizeController,omitempty"`
+	KustomizeController KustomizeControllerSpec `json:"kustomizeController"`
 	// +optional
-	NotificationController NotificationControllerSpec `json:"notificationController,omitempty"`
+	NotificationController NotificationControllerSpec `json:"notificationController"`
 	// +optional
-	SourceController SourceControllerSpec `json:"sourceController,omitempty"`
+	SourceController SourceControllerSpec `json:"sourceController"`
 	// +optional
-	Policies Policies `json:"policies,omitempty"`
+	Policies Policies `json:"policies"`
 	// +optional
-	Rbac Rbac `json:"rbac,omitempty"`
+	Rbac Rbac `json:"rbac"`
 	// +optional
-	LogLevel string `json:"logLevel,omitempty"`
+	LogLevel string `json:"logLevel"`
 	// +optional
-	WatchAllNamespaces bool `json:"watchAllNamespaces,omitempty"`
+	WatchAllNamespaces bool `json:"watchAllNamespaces"`
 	// +optional
-	ImagePullSecrets []core.LocalObjectReference `json:"imagePullSecrets,omitempty"`
+	ImagePullSecrets []core.LocalObjectReference `json:"imagePullSecrets"`
 	// +optional
-	ExtraObjects []runtime.RawExtension `json:"extraObjects,omitempty"`
+	ExtraObjects []runtime.RawExtension `json:"extraObjects"`
 	// +optional
-	Prometheus PrometheusSpec `json:"prometheus,omitempty"`
+	Prometheus PrometheusSpec `json:"prometheus"`
 }
 
 type CRDsSpec struct {
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 }
 
 type Multitenancy struct {
 	// +optional
-	Enabled bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 	// +optional
-	DefaultServiceAccount string `json:"defaultServiceAccount,omitempty"`
+	DefaultServiceAccount string `json:"defaultServiceAccount"`
 	// +optional
-	Privileged bool `json:"privileged,omitempty"`
+	Privileged bool `json:"privileged"`
 }
 
 type CliSpec struct {
 	// +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image"`
 	// +optional
-	Tag string `json:"tag,omitempty"`
+	Tag string `json:"tag"`
 	// +optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector map[string]string `json:"nodeSelector"`
 	// +optional
-	Affinity core.Affinity `json:"affinity,omitempty"`
+	Affinity core.Affinity `json:"affinity"`
 	// +optional
-	Tolerations []core.Toleration `json:"tolerations,omitempty"`
+	Tolerations []core.Toleration `json:"tolerations"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 	// +optional
-	ServiceAccount CliServiceAccountSpec `json:"serviceAccount,omitempty"`
+	ServiceAccount CliServiceAccountSpec `json:"serviceAccount"`
 }
 
 type CliServiceAccountSpec struct {
 	// +optional
-	Automount bool `json:"automount,omitempty"`
+	Automount bool `json:"automount"`
 }
 
 type ControllerSpec struct {
 	Create bool `json:"create"`
 	// +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image"`
 	// +optional
-	Tag string `json:"tag,omitempty"`
+	Tag string `json:"tag"`
 	// +optional
-	Resources ResourceRequirements `json:"resources,omitempty"`
+	Resources ResourceRequirements `json:"resources"`
 	// +optional
-	PriorityClassName string `json:"priorityClassName,omitempty"`
+	PriorityClassName string `json:"priorityClassName"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels"`
 	// +optional
-	Container ContainerSpec `json:"container,omitempty"`
+	Container ContainerSpec `json:"container"`
 	// +optional
-	ExtraEnv []core.EnvVar `json:"extraEnv,omitempty"`
+	ExtraEnv []core.EnvVar `json:"extraEnv"`
 	// +optional
-	ServiceAccount ServiceAccountSpec `json:"serviceAccount,omitempty"`
+	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 	// +optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
-	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy,omitempty"`
+	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	// +optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector map[string]string `json:"nodeSelector"`
 	// +optional
-	Affinity core.Affinity `json:"affinity,omitempty"`
+	Affinity core.Affinity `json:"affinity"`
 	// +optional
-	Tolerations []core.Toleration `json:"tolerations,omitempty"`
+	Tolerations []core.Toleration `json:"tolerations"`
 }
 
 type KustomizeControllerSpec struct {
 	Create bool `json:"create"`
 	// +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image"`
 	// +optional
-	Tag string `json:"tag,omitempty"`
+	Tag string `json:"tag"`
 	// +optional
-	Resources ResourceRequirements `json:"resources,omitempty"`
+	Resources ResourceRequirements `json:"resources"`
 	// +optional
-	PriorityClassName string `json:"priorityClassName,omitempty"`
+	PriorityClassName string `json:"priorityClassName"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels"`
 	// +optional
-	Container ContainerSpec `json:"container,omitempty"`
+	Container ContainerSpec `json:"container"`
 	// +optional
-	EnvFrom EnvFromSource `json:"envFrom,omitempty"`
+	EnvFrom EnvFromSource `json:"envFrom"`
 	// +optional
-	ExtraEnv []core.EnvVar `json:"extraEnv,omitempty"`
+	ExtraEnv []core.EnvVar `json:"extraEnv"`
 	// +optional
-	ExtraSecretMounts []core.VolumeMount `json:"extraSecretMounts,omitempty"`
+	ExtraSecretMounts []core.VolumeMount `json:"extraSecretMounts"`
 	// +optional
-	ServiceAccount ServiceAccountSpec `json:"serviceAccount,omitempty"`
+	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 	// +optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
-	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy,omitempty"`
+	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	// +optional
-	Secret SecretSpec `json:"secret,omitempty"`
+	Secret SecretSpec `json:"secret"`
 	// +optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector map[string]string `json:"nodeSelector"`
 	// +optional
-	Affinity core.Affinity `json:"affinity,omitempty"`
+	Affinity core.Affinity `json:"affinity"`
 	// +optional
-	Tolerations []core.Toleration `json:"tolerations,omitempty"`
+	Tolerations []core.Toleration `json:"tolerations"`
 }
 
 type SecretSpec struct {
-	Create bool `json:"create,omitempty"`
+	Create bool `json:"create"`
 	// +optional
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 	// +optional
-	Data map[string]string `json:"data,omitempty"`
+	Data map[string]string `json:"data"`
 }
 
 type NotificationControllerSpec struct {
 	Create bool `json:"create"`
 	// +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image"`
 	// +optional
-	Tag string `json:"tag,omitempty"`
+	Tag string `json:"tag"`
 	// +optional
-	Resources ResourceRequirements `json:"resources,omitempty"`
+	Resources ResourceRequirements `json:"resources"`
 	// +optional
-	PriorityClassName string `json:"priorityClassName,omitempty"`
+	PriorityClassName string `json:"priorityClassName"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels"`
 	// +optional
-	Container ContainerSpec `json:"container,omitempty"`
+	Container ContainerSpec `json:"container"`
 	// +optional
-	ExtraEnv []core.EnvVar `json:"extraEnv,omitempty"`
+	ExtraEnv []core.EnvVar `json:"extraEnv"`
 	// +optional
-	ServiceAccount ServiceAccountSpec `json:"serviceAccount,omitempty"`
+	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 	// +optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
-	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy,omitempty"`
+	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	// +optional
-	Service ServiceSpec `json:"service,omitempty"`
+	Service ServiceSpec `json:"service"`
 	// +optional
-	WebhookReceiver WebhookReceiverSpec `json:"webhookReceiver,omitempty"`
+	WebhookReceiver WebhookReceiverSpec `json:"webhookReceiver"`
 	// +optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector map[string]string `json:"nodeSelector"`
 	// +optional
-	Affinity core.Affinity `json:"affinity,omitempty"`
+	Affinity core.Affinity `json:"affinity"`
 	// +optional
-	Tolerations []core.Toleration `json:"tolerations,omitempty"`
+	Tolerations []core.Toleration `json:"tolerations"`
 }
 
 type WebhookReceiverSpec struct {
 	// +optional
-	Service ServiceSpec `json:"service,omitempty"`
+	Service ServiceSpec `json:"service"`
 	// +optional
-	Ingress IngressSpec `json:"ingress,omitempty"`
+	Ingress IngressSpec `json:"ingress"`
 }
 
 type IngressSpec struct {
-	Create      bool                    `json:"create,omitempty"`
-	Annotations map[string]string       `json:"annotations,omitempty"`
-	Labels      map[string]string       `json:"labels,omitempty"`
-	Hosts       []IngressRule           `json:"hosts,omitempty"`
-	TLS         []networking.IngressTLS `json:"tls,omitempty"`
+	Create      bool                    `json:"create"`
+	Annotations map[string]string       `json:"annotations"`
+	Labels      map[string]string       `json:"labels"`
+	Hosts       []IngressRule           `json:"hosts"`
+	TLS         []networking.IngressTLS `json:"tls"`
 }
 
 type IngressRule struct {
-	Host  string            `json:"host,omitempty"`
-	Paths []HTTPIngressPath `json:"paths,omitempty"`
+	Host  string            `json:"host"`
+	Paths []HTTPIngressPath `json:"paths"`
 }
 
 type HTTPIngressPath struct {
-	Path     string `json:"path,omitempty"`
-	PathType string `json:"pathType,omitempty"`
+	Path     string `json:"path"`
+	PathType string `json:"pathType"`
 }
 
 type SourceControllerSpec struct {
 	Create bool `json:"create"`
 	// +optional
-	Image string `json:"image,omitempty"`
+	Image string `json:"image"`
 	// +optional
-	Tag string `json:"tag,omitempty"`
+	Tag string `json:"tag"`
 	// +optional
-	Resources ResourceRequirements `json:"resources,omitempty"`
+	Resources ResourceRequirements `json:"resources"`
 	// +optional
-	PriorityClassName string `json:"priorityClassName,omitempty"`
+	PriorityClassName string `json:"priorityClassName"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels"`
 	// +optional
-	Container ContainerSpec `json:"container,omitempty"`
+	Container ContainerSpec `json:"container"`
 	// +optional
-	ExtraEnv []core.EnvVar `json:"extraEnv,omitempty"`
+	ExtraEnv []core.EnvVar `json:"extraEnv"`
 	// +optional
-	ServiceAccount ServiceAccountSpec `json:"serviceAccount,omitempty"`
+	ServiceAccount ServiceAccountSpec `json:"serviceAccount"`
 	// +optional
 	//+kubebuilder:validation:Enum=Always;Never;IfNotPresent;""
-	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy,omitempty"`
+	ImagePullPolicy core.PullPolicy `json:"imagePullPolicy"`
 	// +optional
-	Service ServiceSpec `json:"service,omitempty"`
+	Service ServiceSpec `json:"service"`
 	// +optional
-	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	NodeSelector map[string]string `json:"nodeSelector"`
 	// +optional
-	Affinity core.Affinity `json:"affinity,omitempty"`
+	Affinity core.Affinity `json:"affinity"`
 	// +optional
-	Tolerations []core.Toleration `json:"tolerations,omitempty"`
+	Tolerations []core.Toleration `json:"tolerations"`
 }
 
 type ServiceSpec struct {
 	// +optional
-	Labels map[string]string `json:"labels,omitempty"`
+	Labels map[string]string `json:"labels"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 }
 
 // ResourceRequirements describes the compute resource requirements.
@@ -279,20 +279,20 @@ type ResourceRequirements struct {
 	// Limits describes the maximum amount of compute resources allowed.
 	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 	// +optional
-	Limits core.ResourceList `json:"limits,omitempty"`
+	Limits core.ResourceList `json:"limits"`
 	// Requests describes the minimum amount of compute resources required.
 	// If Requests is omitted for a container, it defaults to Limits if that is explicitly specified,
 	// otherwise to an implementation-defined value.
 	// More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
 	// +optional
-	Requests core.ResourceList `json:"requests,omitempty"`
+	Requests core.ResourceList `json:"requests"`
 }
 
 type EnvFromSource struct {
 	// +optional
-	Map LocalObjectReference `json:"map,omitempty"`
+	Map LocalObjectReference `json:"map"`
 	// +optional
-	Secret LocalObjectReference `json:"secret,omitempty"`
+	Secret LocalObjectReference `json:"secret"`
 }
 
 type LocalObjectReference struct {
@@ -300,59 +300,59 @@ type LocalObjectReference struct {
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
 	// TODO: Add other useful fields. apiVersion, kind, uid?
 	// +optional
-	Name string `json:"name,omitempty"`
+	Name string `json:"name"`
 }
 
 type ContainerSpec struct {
 	// +optional
-	AdditionalArgs []string `json:"additionalArgs,omitempty"`
+	AdditionalArgs []string `json:"additionalArgs"`
 }
 
 type ServiceAccountSpec struct {
-	Create bool `json:"create,omitempty"`
+	Create bool `json:"create"`
 	// +optional
-	Automount bool `json:"automount,omitempty"`
+	Automount bool `json:"automount"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 }
 
 type Policies struct {
-	Create bool `json:"create,omitempty"`
+	Create bool `json:"create"`
 }
 
 type Rbac struct {
-	Create bool `json:"create,omitempty"`
+	Create bool `json:"create"`
 	// +optional
-	CreateAggregation bool `json:"createAggregation,omitempty"`
+	CreateAggregation bool `json:"createAggregation"`
 	// +optional
-	Annotations map[string]string `json:"annotations,omitempty"`
+	Annotations map[string]string `json:"annotations"`
 }
 
 type PrometheusSpec struct {
 	// +optional
-	PodMonitor PodMonitorSpec `json:"podMonitor,omitempty"`
+	PodMonitor PodMonitorSpec `json:"podMonitor"`
 }
 
 type PodMonitorSpec struct {
-	Create bool `json:"create,omitempty"`
+	Create bool `json:"create"`
 	// +optional
-	PodMetricsEndpoints []MetricsEndpoints `json:"podMetricsEndpoints,omitempty"`
+	PodMetricsEndpoints []MetricsEndpoints `json:"podMetricsEndpoints"`
 }
 
 type MetricsEndpoints struct {
 	// +optional
-	Port string `json:"port,omitempty"`
+	Port string `json:"port"`
 	// +optional
-	Relabelings []Relabeling `json:"relabelings,omitempty"`
+	Relabelings []Relabeling `json:"relabelings"`
 }
 
 type Relabeling struct {
 	// +optional
-	SourceLabels []string `json:"sourceLabels,omitempty"`
+	SourceLabels []string `json:"sourceLabels"`
 	// +optional
-	Action string `json:"action,omitempty"`
+	Action string `json:"action"`
 	// +optional
-	Regex string `json:"regex,omitempty"`
+	Regex string `json:"regex"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

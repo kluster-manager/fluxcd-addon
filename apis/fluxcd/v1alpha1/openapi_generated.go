@@ -417,8 +417,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliServiceAccountSpec(ref common.R
 				Properties: map[string]spec.Schema{
 					"automount": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 				},
@@ -435,14 +436,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliSpec(ref common.ReferenceCallba
 				Properties: map[string]spec.Schema{
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"nodeSelector": {
@@ -549,14 +552,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"resources": {
@@ -567,8 +572,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -629,6 +635,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -822,8 +829,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 					},
 					"clusterDomain": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"cli": {
@@ -882,14 +890,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 					},
 					"logLevel": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"watchAllNamespaces": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"imagePullSecrets": {
@@ -940,17 +950,20 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_HTTPIngressPath(ref common.Referen
 				Properties: map[string]spec.Schema{
 					"path": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"pathType": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 				},
+				Required: []string{"path", "pathType"},
 			},
 		},
 	}
@@ -964,8 +977,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressRule(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"host": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"paths": {
@@ -982,6 +996,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressRule(ref common.ReferenceCa
 						},
 					},
 				},
+				Required: []string{"host", "paths"},
 			},
 		},
 		Dependencies: []string{
@@ -997,8 +1012,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressSpec(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1058,6 +1074,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressSpec(ref common.ReferenceCa
 						},
 					},
 				},
+				Required: []string{"create", "annotations", "labels", "hosts", "tls"},
 			},
 		},
 		Dependencies: []string{
@@ -1080,14 +1097,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"resources": {
@@ -1098,8 +1117,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1179,6 +1199,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -1242,6 +1263,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_LocalObjectReference(ref common.Re
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -1260,8 +1282,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_MetricsEndpoints(ref common.Refere
 				Properties: map[string]spec.Schema{
 					"port": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"relabelings": {
@@ -1293,20 +1316,23 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Multitenancy(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"defaultServiceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"privileged": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 				},
@@ -1330,14 +1356,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"resources": {
@@ -1348,8 +1376,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1410,6 +1439,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -1478,8 +1508,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_PodMonitorSpec(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"podMetricsEndpoints": {
@@ -1496,6 +1527,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_PodMonitorSpec(ref common.Referenc
 						},
 					},
 				},
+				Required: []string{"create"},
 			},
 		},
 		Dependencies: []string{
@@ -1511,11 +1543,13 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Policies(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 				},
+				Required: []string{"create"},
 			},
 		},
 	}
@@ -1549,14 +1583,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Rbac(ref common.ReferenceCallback)
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"createAggregation": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1575,6 +1611,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Rbac(ref common.ReferenceCallback)
 						},
 					},
 				},
+				Required: []string{"create"},
 			},
 		},
 	}
@@ -1602,14 +1639,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Relabeling(ref common.ReferenceCal
 					},
 					"action": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"regex": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 				},
@@ -1669,14 +1708,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SecretSpec(ref common.ReferenceCal
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"data": {
@@ -1695,6 +1736,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SecretSpec(ref common.ReferenceCal
 						},
 					},
 				},
+				Required: []string{"create"},
 			},
 		},
 	}
@@ -1708,14 +1750,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ServiceAccountSpec(ref common.Refe
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"automount": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"boolean"},
-							Format: "",
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1734,6 +1778,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ServiceAccountSpec(ref common.Refe
 						},
 					},
 				},
+				Required: []string{"create"},
 			},
 		},
 	}
@@ -1796,14 +1841,16 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"resources": {
@@ -1814,8 +1861,9 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
 						},
 					},
 					"annotations": {
@@ -1876,6 +1924,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
+							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
