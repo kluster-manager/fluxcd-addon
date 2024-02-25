@@ -24,3 +24,4 @@ testbin/*
 *~
 /.go
 /bin
+/.config
