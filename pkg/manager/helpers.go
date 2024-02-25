@@ -18,12 +18,14 @@ package manager
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"kubepack.dev/lib-helm/pkg/values"
 
 	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
 
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/types"
-	"kubepack.dev/lib-helm/pkg/values"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	"open-cluster-management.io/api/addon/v1alpha1"
@@ -50,7 +52,8 @@ const (
 // addonfactory.Values. These values are then used to customize configuration of addon-agent.
 func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 	return func(cluster *clusterv1.ManagedCluster, addon *v1alpha1.ManagedClusterAddOn) (addonfactory.Values, error) {
-		overrideValues := addonfactory.Values{}
+		var overrideValues map[string]any
+		ov := addonfactory.Values{}
 		for _, refConfig := range addon.Status.ConfigReferences {
 			if refConfig.ConfigGroupResource.Group != FluxCDConfigGroup ||
 				refConfig.ConfigGroupResource.Resource != FluxCDConfigResource {
@@ -63,11 +66,17 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 				return nil, err
 			}
 
+			if err := copy(fluxCDConfig.Spec, &overrideValues); err != nil {
+				return nil, err
+			}
+
 			vals, err := values.GetValuesDiff(fluxcnfv1alpha.FluxCDConfigSpec{}, fluxCDConfig.Spec)
 			if err != nil {
 				return nil, err
 			}
-			overrideValues = addonfactory.MergeValues(overrideValues, vals)
+
+			ov = addonfactory.MergeValues(ov, vals)
+			break
 		}
 
 		data, err := FS.ReadFile("agent-manifests/flux2/values.yaml")
@@ -81,8 +90,62 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 			return nil, err
 		}
 
-		configValues := addonfactory.MergeValues(defaultValues, overrideValues)
+		configValues := addonfactory.MergeValues(defaultValues, ov)
 
+		// override controller values
+		helmController, _, err := unstructured.NestedBool(overrideValues, "helmController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, helmController, "helmController", "create"); err != nil {
+			return nil, err
+		}
+
+		sourceController, _, err := unstructured.NestedBool(overrideValues, "sourceController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, sourceController, "sourceController", "create"); err != nil {
+			return nil, err
+		}
+
+		imageReflectionController, _, err := unstructured.NestedBool(overrideValues, "imageReflectionController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, imageReflectionController, "imageReflectionController", "create"); err != nil {
+			return nil, err
+		}
+
+		imageAutomationController, _, err := unstructured.NestedBool(overrideValues, "imageAutomationController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, imageAutomationController, "imageAutomationController", "create"); err != nil {
+			return nil, err
+		}
+
+		kustomizeController, _, err := unstructured.NestedBool(overrideValues, "kustomizeController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, kustomizeController, "kustomizeController", "create"); err != nil {
+			return nil, err
+		}
+
+		notificationController, _, err := unstructured.NestedBool(overrideValues, "notificationController", "create")
+		if err != nil {
+			return nil, err
+		}
+
+		if err := unstructured.SetNestedField(configValues, notificationController, "notificationController", "create"); err != nil {
+			return nil, err
+		}
 		return configValues, nil
 	}
 }
@@ -140,4 +203,12 @@ func agentHealthProber() *agentapi.HealthProber {
 			},
 		},
 	}
+}
+
+func copy(src any, dst any) error {
+	jsonByte, err := json.Marshal(src)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(jsonByte, dst)
 }
