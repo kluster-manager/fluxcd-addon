@@ -23,9 +23,3 @@ limitations under the License.
 
 // +groupName=fluxcd.open-cluster-management.io
 package v1alpha1
-
-
-
-
-
-

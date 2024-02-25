@@ -19,8 +19,8 @@ package manager
 import (
 	"context"
 	"fmt"
+
 	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
-	"sigs.k8s.io/yaml"
 
 	"k8s.io/apimachinery/pkg/types"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
@@ -29,6 +29,7 @@ import (
 	clusterv1 "open-cluster-management.io/api/cluster/v1"
 	workapiv1 "open-cluster-management.io/api/work/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/yaml"
 )
 
 const (
