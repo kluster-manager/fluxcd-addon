@@ -437,9 +437,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliServiceAccountSpec(ref common.R
 				Properties: map[string]spec.Schema{
 					"automount": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 				},
@@ -456,16 +455,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliSpec(ref common.ReferenceCallba
 				Properties: map[string]spec.Schema{
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"nodeSelector": {
@@ -485,8 +482,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliSpec(ref common.ReferenceCallba
 					},
 					"affinity": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+							Ref: ref("k8s.io/api/core/v1.Affinity"),
 						},
 					},
 					"tolerations": {
@@ -519,8 +515,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliSpec(ref common.ReferenceCallba
 					},
 					"serviceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliServiceAccountSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliServiceAccountSpec"),
 						},
 					},
 				},
@@ -565,36 +560,31 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"resources": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
 						},
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -629,8 +619,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					},
 					"container": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
 						},
 					},
 					"extraEnv": {
@@ -648,14 +637,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					},
 					"serviceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
 						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -678,8 +665,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 					},
 					"affinity": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+							Ref: ref("k8s.io/api/core/v1.Affinity"),
 						},
 					},
 					"tolerations": {
@@ -712,14 +698,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_EnvFromSource(ref common.Reference
 				Properties: map[string]spec.Schema{
 					"map": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.LocalObjectReference"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.LocalObjectReference"),
 						},
 					},
 					"secret": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.LocalObjectReference"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.LocalObjectReference"),
 						},
 					},
 				},
@@ -830,96 +814,81 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 				Properties: map[string]spec.Schema{
 					"installCRDs": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"crds": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CRDsSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CRDsSpec"),
 						},
 					},
 					"multitenancy": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Multitenancy"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Multitenancy"),
 						},
 					},
 					"clusterDomain": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"cli": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliSpec"),
 						},
 					},
 					"helmController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
 						},
 					},
 					"imageAutomationController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
 						},
 					},
 					"imageReflectionController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec"),
 						},
 					},
 					"kustomizeController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.KustomizeControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.KustomizeControllerSpec"),
 						},
 					},
 					"notificationController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.NotificationControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.NotificationControllerSpec"),
 						},
 					},
 					"sourceController": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec"),
 						},
 					},
 					"policies": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Policies"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Policies"),
 						},
 					},
 					"rbac": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Rbac"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Rbac"),
 						},
 					},
 					"logLevel": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"watchAllNamespaces": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"imagePullSecrets": {
@@ -949,8 +918,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 					},
 					"prometheus": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PrometheusSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PrometheusSpec"),
 						},
 					},
 				},
@@ -970,16 +938,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_HTTPIngressPath(ref common.Referen
 				Properties: map[string]spec.Schema{
 					"path": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"pathType": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 				},
@@ -997,9 +963,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressRule(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"host": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"paths": {
@@ -1032,9 +997,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_IngressSpec(ref common.ReferenceCa
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1110,36 +1074,31 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"resources": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
 						},
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1174,14 +1133,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"container": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
 						},
 					},
 					"envFrom": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.EnvFromSource"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.EnvFromSource"),
 						},
 					},
 					"extraEnv": {
@@ -1212,14 +1169,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"serviceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
 						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -1227,8 +1182,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"secret": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SecretSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SecretSpec"),
 						},
 					},
 					"nodeSelector": {
@@ -1248,8 +1202,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref common
 					},
 					"affinity": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+							Ref: ref("k8s.io/api/core/v1.Affinity"),
 						},
 					},
 					"tolerations": {
@@ -1283,7 +1236,6 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_LocalObjectReference(ref common.Re
 					"name": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 						},
@@ -1302,9 +1254,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_MetricsEndpoints(ref common.Refere
 				Properties: map[string]spec.Schema{
 					"port": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"relabelings": {
@@ -1336,23 +1287,20 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Multitenancy(ref common.ReferenceC
 				Properties: map[string]spec.Schema{
 					"enabled": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"defaultServiceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"privileged": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 				},
@@ -1369,36 +1317,31 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"resources": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
 						},
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1433,8 +1376,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"container": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
 						},
 					},
 					"extraEnv": {
@@ -1452,14 +1394,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"serviceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
 						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -1467,14 +1407,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"service": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
 						},
 					},
 					"webhookReceiver": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.WebhookReceiverSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.WebhookReceiverSpec"),
 						},
 					},
 					"nodeSelector": {
@@ -1494,8 +1432,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref com
 					},
 					"affinity": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+							Ref: ref("k8s.io/api/core/v1.Affinity"),
 						},
 					},
 					"tolerations": {
@@ -1528,9 +1465,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_PodMonitorSpec(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"podMetricsEndpoints": {
@@ -1563,9 +1499,8 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Policies(ref common.ReferenceCallb
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 				},
@@ -1583,8 +1518,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_PrometheusSpec(ref common.Referenc
 				Properties: map[string]spec.Schema{
 					"podMonitor": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PodMonitorSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PodMonitorSpec"),
 						},
 					},
 				},
@@ -1603,16 +1537,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Rbac(ref common.ReferenceCallback)
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"createAggregation": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1659,16 +1591,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Relabeling(ref common.ReferenceCal
 					},
 					"action": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"regex": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 				},
@@ -1728,16 +1658,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SecretSpec(ref common.ReferenceCal
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"name": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"data": {
@@ -1770,16 +1698,14 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ServiceAccountSpec(ref common.Refe
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"automount": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1854,36 +1780,31 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 				Properties: map[string]spec.Schema{
 					"create": {
 						SchemaProps: spec.SchemaProps{
-							Default: false,
-							Type:    []string{"boolean"},
-							Format:  "",
+							Type:   []string{"boolean"},
+							Format: "",
 						},
 					},
 					"image": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"tag": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"resources": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
 						},
 					},
 					"priorityClassName": {
 						SchemaProps: spec.SchemaProps{
-							Default: "",
-							Type:    []string{"string"},
-							Format:  "",
+							Type:   []string{"string"},
+							Format: "",
 						},
 					},
 					"annotations": {
@@ -1918,8 +1839,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"container": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec"),
 						},
 					},
 					"extraEnv": {
@@ -1937,14 +1857,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"serviceAccount": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec"),
 						},
 					},
 					"imagePullPolicy": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Possible enum values:\n - `\"Always\"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.\n - `\"IfNotPresent\"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.\n - `\"Never\"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present",
-							Default:     "",
 							Type:        []string{"string"},
 							Format:      "",
 							Enum:        []interface{}{"Always", "IfNotPresent", "Never"},
@@ -1952,8 +1870,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"service": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
 						},
 					},
 					"nodeSelector": {
@@ -1973,8 +1890,7 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_SourceControllerSpec(ref common.Re
 					},
 					"affinity": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+							Ref: ref("k8s.io/api/core/v1.Affinity"),
 						},
 					},
 					"tolerations": {
@@ -2007,14 +1923,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_WebhookReceiverSpec(ref common.Ref
 				Properties: map[string]spec.Schema{
 					"service": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec"),
 						},
 					},
 					"ingress": {
 						SchemaProps: spec.SchemaProps{
-							Default: map[string]interface{}{},
-							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.IngressSpec"),
+							Ref: ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.IngressSpec"),
 						},
 					},
 				},
