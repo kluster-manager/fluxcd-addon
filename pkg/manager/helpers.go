@@ -20,10 +20,8 @@ import (
 	"context"
 	"fmt"
 
-	fluxcnfv1alpha "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
-
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/types"
-	"kubepack.dev/lib-helm/pkg/values"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	"open-cluster-management.io/api/addon/v1alpha1"
@@ -57,17 +55,21 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 				continue
 			}
 
-			fluxCDConfig := fluxcnfv1alpha.FluxCDConfig{}
+			var fluxCDConfig unstructured.Unstructured
+			fluxCDConfig.SetAPIVersion("fluxcd.open-cluster-management.io/v1alpha1")
+			fluxCDConfig.SetKind("FluxCDConfig")
 			key := types.NamespacedName{Name: refConfig.Name, Namespace: refConfig.Namespace}
 			if err := kc.Get(context.TODO(), key, &fluxCDConfig); err != nil {
 				return nil, err
 			}
 
-			vals, err := values.GetValuesDiff(fluxcnfv1alpha.FluxCDConfigSpec{}, fluxCDConfig.Spec)
+			vals, ok, err := unstructured.NestedMap(fluxCDConfig.UnstructuredContent(), "spec")
 			if err != nil {
 				return nil, err
 			}
-			overrideValues = addonfactory.MergeValues(overrideValues, vals)
+			if ok {
+				overrideValues = addonfactory.MergeValues(overrideValues, vals)
+			}
 		}
 
 		data, err := FS.ReadFile("agent-manifests/flux2/values.yaml")
