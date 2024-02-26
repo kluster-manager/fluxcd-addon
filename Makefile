@@ -423,7 +423,7 @@ install:
 	@cd ../installer; \
 	kubectl create ns $(KUBE_NAMESPACE) || true; \
 	kubectl label ns $(KUBE_NAMESPACE) pod-security.kubernetes.io/enforce=restricted; \
-	helm upgrade -i fluxcd-addon-manager charts/fluxcd-addon-manager --wait \
+	helm upgrade -i fluxcd-manager charts/fluxcd-manager --wait \
 		--namespace=$(KUBE_NAMESPACE) --create-namespace \
 		--set registryFQDN="" \
 		--set image.registry=$(REGISTRY) \
@@ -434,7 +434,7 @@ install:
 .PHONY: uninstall
 uninstall:
 	@cd ../installer; \
-	helm uninstall fluxcd-addon-manager --namespace=$(KUBE_NAMESPACE) || true
+	helm uninstall fluxcd-manager --namespace=$(KUBE_NAMESPACE) || true
 
 .PHONY: purge
 purge: uninstall
