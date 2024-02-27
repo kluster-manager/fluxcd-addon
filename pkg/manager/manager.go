@@ -64,7 +64,7 @@ func NewManagerCommand() *cobra.Command {
 		NewControllerCommandConfig(AddonName, version.Get(), runManagerController).
 		NewCommand()
 	cmd.Use = "manager"
-	cmd.Short = "Starts the addon manager controller"
+	cmd.Short = "Starts the fluxcd addon manager"
 
 	return cmd
 }
