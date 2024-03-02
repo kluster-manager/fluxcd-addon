@@ -23,6 +23,12 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 )
 
+const (
+	ResourceKindFluxCDConfig = "FluxCDConfig"
+	ResourceFluxCDConfig     = "fluxcdconfig"
+	ResourceFluxCDConfigs    = "fluxcdconfigs"
+)
+
 // FluxCDConfigSpec defines the desired state of FluxCDConfig
 type FluxCDConfigSpec struct {
 	InstallCRDs bool `json:"installCRDs"`

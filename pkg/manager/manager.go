@@ -20,11 +20,10 @@ import (
 	"context"
 	"embed"
 
-	fluxapi1alpha1 "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
+	fluxcdv1alpha1 "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
 
 	"github.com/spf13/cobra"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/apimachinery/pkg/runtime/schema"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/client-go/rest"
 	"k8s.io/component-base/version"
@@ -55,7 +54,7 @@ const (
 var scheme = runtime.NewScheme()
 
 func init() {
-	utilruntime.Must(fluxapi1alpha1.AddToScheme(scheme))
+	utilruntime.Must(fluxcdv1alpha1.AddToScheme(scheme))
 }
 
 // NewManagerCommand creates a command for starting the addon manager controller.
@@ -86,9 +85,7 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 
 	// Initialize the agent addon factory and configure it.
 	agent, err := addonfactory.NewAgentAddonFactory(AddonName, FS, AgentManifestsDir).
-		WithConfigGVRs(
-			schema.GroupVersionResource{Group: FluxCDConfigGroup, Version: FluxCDConfigVersion, Resource: FluxCDConfigResource},
-		).
+		WithConfigGVRs(fluxcdv1alpha1.GroupVersion.WithResource(fluxcdv1alpha1.ResourceFluxCDConfigs)).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
 		WithAgentInstallNamespace(func(addon *v1alpha1.ManagedClusterAddOn) string { return AgentInstallNamespace }).

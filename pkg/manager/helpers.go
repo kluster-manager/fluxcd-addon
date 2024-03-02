@@ -20,6 +20,8 @@ import (
 	"context"
 	"fmt"
 
+	fluxcdv1alpha1 "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
+
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/types"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
@@ -31,17 +33,6 @@ import (
 	"sigs.k8s.io/yaml"
 )
 
-const (
-	// FluxCDConfigVersion defines the API version used for FluxCDConfigs.
-	FluxCDConfigVersion = "v1alpha1"
-
-	// FluxCDConfigResource is the resource name for FluxCDConfig objects.
-	FluxCDConfigResource = "fluxcdconfigs"
-
-	// FluxCDConfigGroup is the group name for FluxCDConfig objects.
-	FluxCDConfigGroup = "fluxcd.open-cluster-management.io"
-)
-
 // GetConfigValues returns a function that retrieves and transforms configuration values from
 // FluxCDConfig objects. The function fetches configuration references from a ManagedClusterAddOn,
 // reads corresponding FluxCDConfig objects, extracts their specifications, and converts them into
@@ -50,8 +41,8 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 	return func(cluster *clusterv1.ManagedCluster, addon *v1alpha1.ManagedClusterAddOn) (addonfactory.Values, error) {
 		overrideValues := addonfactory.Values{}
 		for _, refConfig := range addon.Status.ConfigReferences {
-			if refConfig.ConfigGroupResource.Group != FluxCDConfigGroup ||
-				refConfig.ConfigGroupResource.Resource != FluxCDConfigResource {
+			if refConfig.ConfigGroupResource.Group != fluxcdv1alpha1.GroupVersion.Group ||
+				refConfig.ConfigGroupResource.Resource != fluxcdv1alpha1.ResourceFluxCDConfigs {
 				continue
 			}
 
