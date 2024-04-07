@@ -88,8 +88,7 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		WithConfigGVRs(fluxcdv1alpha1.GroupVersion.WithResource(fluxcdv1alpha1.ResourceFluxCDConfigs)).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
 		WithAgentHealthProber(agentHealthProber()).
-		WithAgentInstallNamespace(func(addon *v1alpha1.ManagedClusterAddOn) string { return AgentInstallNamespace }).
-		WithCreateAgentInstallNamespace().
+		WithAgentInstallNamespace(func(addon *v1alpha1.ManagedClusterAddOn) (string, error) { return AgentInstallNamespace, nil }).
 		BuildHelmAgentAddon()
 	if err != nil {
 		klog.Errorf("Failed to build agent: `%v`", err)
