@@ -30,6 +30,7 @@ import (
 	"k8s.io/klog/v2"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	"open-cluster-management.io/addon-framework/pkg/addonmanager"
+	"open-cluster-management.io/addon-framework/pkg/agent"
 	cmdfactory "open-cluster-management.io/addon-framework/pkg/cmd/factory"
 	"open-cluster-management.io/api/addon/v1alpha1"
 	_ "open-cluster-management.io/api/addon/v1alpha1"
@@ -42,6 +43,8 @@ var FS embed.FS
 const (
 	// AddonName represents the name of the FluxCD addon.
 	AddonName = "fluxcd-addon"
+
+	AgentName = "fluxcd-addon"
 
 	// AgentManifestsDir is the directory containing Flux2 agent-manifests.
 	AgentManifestsDir = "agent-manifests/flux2"
@@ -68,6 +71,16 @@ func NewManagerCommand() *cobra.Command {
 	return cmd
 }
 
+func NewRegistrationOption(addonName, agentName string) *agent.RegistrationOption {
+	return &agent.RegistrationOption{
+		CSRConfigurations: agent.KubeClientSignerConfigurations(addonName, agentName),
+		CSRApproveCheck:   agent.ApprovalAllCSRs,
+		AgentInstallNamespace: func(addon *v1alpha1.ManagedClusterAddOn) (string, error) {
+			return AgentInstallNamespace, nil
+		},
+	}
+}
+
 // runManagerController initializes and runs the addon manager controller.
 // It sets up the required Kubernetes client, agent, and manager to manage the addon.
 func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
@@ -83,10 +96,12 @@ func runManagerController(ctx context.Context, kubeConfig *rest.Config) error {
 		return err
 	}
 
+	registrationOption := NewRegistrationOption(AddonName, AgentName)
 	// Initialize the agent addon factory and configure it.
 	agent, err := addonfactory.NewAgentAddonFactory(AddonName, FS, AgentManifestsDir).
 		WithConfigGVRs(fluxcdv1alpha1.GroupVersion.WithResource(fluxcdv1alpha1.ResourceFluxCDConfigs)).
 		WithGetValuesFuncs(GetConfigValues(kubeClient)).
+		WithAgentRegistrationOption(registrationOption).
 		WithAgentHealthProber(agentHealthProber()).
 		WithAgentInstallNamespace(func(addon *v1alpha1.ManagedClusterAddOn) (string, error) { return AgentInstallNamespace, nil }).
 		BuildHelmAgentAddon()
