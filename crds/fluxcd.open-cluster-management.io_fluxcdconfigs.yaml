@@ -3453,6 +3453,13 @@ spec:
                     type: boolean
                   createAggregation:
                     type: boolean
+                  roleRef:
+                    properties:
+                      name:
+                        type: string
+                    required:
+                    - name
+                    type: object
                 required:
                 - create
                 type: object

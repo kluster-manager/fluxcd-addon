@@ -332,6 +332,12 @@ type Rbac struct {
 	CreateAggregation bool `json:"createAggregation"`
 	// +optional
 	Annotations map[string]string `json:"annotations"`
+	// +optional
+	RoleRef RoleRef `json:"roleRef"`
+}
+
+type RoleRef struct {
+	Name string `json:"name"`
 }
 
 type PrometheusSpec struct {

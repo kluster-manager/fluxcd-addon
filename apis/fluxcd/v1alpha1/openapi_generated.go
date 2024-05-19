@@ -57,6 +57,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Rbac":                       schema_fluxcd_addon_apis_fluxcd_v1alpha1_Rbac(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Relabeling":                 schema_fluxcd_addon_apis_fluxcd_v1alpha1_Relabeling(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements":       schema_fluxcd_addon_apis_fluxcd_v1alpha1_ResourceRequirements(ref),
+		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.RoleRef":                    schema_fluxcd_addon_apis_fluxcd_v1alpha1_RoleRef(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SecretSpec":                 schema_fluxcd_addon_apis_fluxcd_v1alpha1_SecretSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceAccountSpec":         schema_fluxcd_addon_apis_fluxcd_v1alpha1_ServiceAccountSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ServiceSpec":                schema_fluxcd_addon_apis_fluxcd_v1alpha1_ServiceSpec(ref),
@@ -1630,10 +1631,18 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Rbac(ref common.ReferenceCallback)
 							},
 						},
 					},
+					"roleRef": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.RoleRef"),
+						},
+					},
 				},
 				Required: []string{"create"},
 			},
 		},
+		Dependencies: []string{
+			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.RoleRef"},
 	}
 }
 
@@ -1717,6 +1726,26 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ResourceRequirements(ref common.Re
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/api/resource.Quantity"},
+	}
+}
+
+func schema_fluxcd_addon_apis_fluxcd_v1alpha1_RoleRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"name"},
+			},
+		},
 	}
 }
 
