@@ -17,7 +17,10 @@ spec:
   manualSelector: true
   selector:
     matchLabels:
+      app: flux-check
+      app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
       app.kubernetes.io/part-of: flux
+      helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
   backoffLimit: 1
   template:
     metadata:
@@ -26,6 +29,7 @@ spec:
       annotations: {{ toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app: flux-check
         app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
         app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
         app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
