@@ -13,7 +13,7 @@ require (
 	k8s.io/component-base v0.30.2
 	k8s.io/klog/v2 v2.120.1
 	k8s.io/kube-openapi v0.0.0-20240430033511-f0e62f92d13f
-	kmodules.xyz/client-go v0.30.43
+	kmodules.xyz/client-go v0.30.44
 	kmodules.xyz/schema-checker v0.4.1
 	open-cluster-management.io/addon-framework v0.11.0
 	open-cluster-management.io/api v0.15.0
