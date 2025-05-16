@@ -111,7 +111,7 @@ spec:
       {{- end }}
       {{- if .Values.imageReflectionController.podSecurityContext }}
       securityContext: {{ toYaml .Values.imageReflectionController.podSecurityContext | nindent 8 }}
-      {{- else }}
+      {{- else if not .Values.openshift }}
       securityContext:
         fsGroup: 1337
       {{- end}}
