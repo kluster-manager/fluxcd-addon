@@ -19,11 +19,13 @@ package manager
 import (
 	"context"
 	"fmt"
+	"slices"
 
 	fluxcdv1alpha1 "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1"
 
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/types"
+	kmapi "kmodules.xyz/client-go/api/v1"
 	"open-cluster-management.io/addon-framework/pkg/addonfactory"
 	agentapi "open-cluster-management.io/addon-framework/pkg/agent"
 	"open-cluster-management.io/api/addon/v1alpha1"
@@ -75,6 +77,20 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 		}
 
 		configValues := addonfactory.MergeValues(defaultValues, overrideValues)
+
+		for _, cc := range cluster.Status.ClusterClaims {
+			if cc.Name == kmapi.ClusterClaimKeyInfo {
+				var info kmapi.ClusterInfo
+				if err := yaml.Unmarshal([]byte(cc.Value), &info); err != nil {
+					return nil, err
+				}
+				if slices.Contains(info.ClusterManagers, kmapi.ClusterManagerOpenShift.Name()) {
+					if err := unstructured.SetNestedField(configValues, true, "openshift"); err != nil {
+						return nil, err
+					}
+				}
+			}
+		}
 
 		return configValues, nil
 	}
