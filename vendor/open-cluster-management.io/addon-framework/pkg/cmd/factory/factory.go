@@ -29,8 +29,8 @@ import (
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	"k8s.io/client-go/tools/record"
 	"k8s.io/component-base/logs"
+	utilversion "k8s.io/component-base/version"
 	"k8s.io/klog/v2"
-	utilversion "k8s.io/apiserver/pkg/util/version"
 )
 
 // ControllerFlags provides the "normal" controller flags
