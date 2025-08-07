@@ -85,7 +85,7 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 					return nil, err
 				}
 				if slices.Contains(info.ClusterMetadata.ClusterManagers, kmapi.ClusterManagerOpenShift.Name()) {
-					if err := unstructured.SetNestedField(configValues, true, "openshift"); err != nil {
+					if err := unstructured.SetNestedField(configValues, true, "distro", "openshift"); err != nil {
 						return nil, err
 					}
 				}

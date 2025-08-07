@@ -40,6 +40,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliSpec":                    schema_fluxcd_addon_apis_fluxcd_v1alpha1_CliSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ContainerSpec":              schema_fluxcd_addon_apis_fluxcd_v1alpha1_ContainerSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec":             schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref),
+		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Distro":                     schema_fluxcd_addon_apis_fluxcd_v1alpha1_Distro(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.EnvFromSource":              schema_fluxcd_addon_apis_fluxcd_v1alpha1_EnvFromSource(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.FluxCDConfig":               schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfig(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.FluxCDConfigList":           schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigList(ref),
@@ -719,6 +720,26 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_ControllerSpec(ref common.Referenc
 	}
 }
 
+func schema_fluxcd_addon_apis_fluxcd_v1alpha1_Distro(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"openshift": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+				},
+				Required: []string{"openshift"},
+			},
+		},
+	}
+}
+
 func schema_fluxcd_addon_apis_fluxcd_v1alpha1_EnvFromSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -968,12 +989,18 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PrometheusSpec"),
 						},
 					},
+					"distro": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Distro"),
+						},
+					},
 				},
 				Required: []string{"installCRDs"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CRDsSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.KustomizeControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Multitenancy", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.NotificationControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Policies", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PrometheusSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Rbac", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
+			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CRDsSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.CliSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Distro", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.KustomizeControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Multitenancy", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.NotificationControllerSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Policies", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PrometheusSpec", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Rbac", "github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec", "k8s.io/api/core/v1.LocalObjectReference", "k8s.io/apimachinery/pkg/runtime.RawExtension"},
 	}
 }
 

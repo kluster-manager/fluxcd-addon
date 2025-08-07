@@ -66,6 +66,8 @@ type FluxCDConfigSpec struct {
 	ExtraObjects []runtime.RawExtension `json:"extraObjects"`
 	// +optional
 	Prometheus PrometheusSpec `json:"prometheus"`
+	// +optional
+	Distro Distro `json:"distro"`
 }
 
 type CRDsSpec struct {
@@ -365,6 +367,10 @@ type Relabeling struct {
 	Action string `json:"action"`
 	// +optional
 	Regex string `json:"regex"`
+}
+
+type Distro struct {
+	Openshift bool `json:"openshift"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

@@ -510,6 +510,13 @@ spec:
                       type: string
                     type: object
                 type: object
+              distro:
+                properties:
+                  openshift:
+                    type: boolean
+                required:
+                - openshift
+                type: object
               extraObjects:
                 items:
                   type: object

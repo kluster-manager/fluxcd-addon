@@ -326,4 +326,5 @@ prometheus:
             action: keep
             regex: Running
 
-openshift: false
+distro:
+  openshift: false
