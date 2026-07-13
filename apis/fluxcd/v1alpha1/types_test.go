@@ -26,7 +26,8 @@ import (
 )
 
 func TestDefaultValues(t *testing.T) {
-	checker := sc.New(os.DirFS("../../.."),
+	checker := sc.New(
+		os.DirFS("../../.."),
 		sc.TestCase{Obj: v1alpha1.FluxCDConfigSpec{}, File: "pkg/manager/agent-manifests/flux2/values.yaml"},
 	)
 	checker.TestAll(t)
