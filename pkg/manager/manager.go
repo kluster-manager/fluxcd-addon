@@ -32,7 +32,6 @@ import (
 	"open-cluster-management.io/addon-framework/pkg/addonmanager"
 	cmdfactory "open-cluster-management.io/addon-framework/pkg/cmd/factory"
 	"open-cluster-management.io/api/addon/v1alpha1"
-	_ "open-cluster-management.io/api/addon/v1alpha1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 )
 
