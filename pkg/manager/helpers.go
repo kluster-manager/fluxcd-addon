@@ -43,8 +43,8 @@ func GetConfigValues(kc client.Client) addonfactory.GetValuesFunc {
 	return func(cluster *clusterv1.ManagedCluster, addon *v1alpha1.ManagedClusterAddOn) (addonfactory.Values, error) {
 		overrideValues := addonfactory.Values{}
 		for _, refConfig := range addon.Status.ConfigReferences {
-			if refConfig.ConfigGroupResource.Group != fluxcdv1alpha1.GroupVersion.Group ||
-				refConfig.ConfigGroupResource.Resource != fluxcdv1alpha1.ResourceFluxCDConfigs {
+			if refConfig.Group != fluxcdv1alpha1.GroupVersion.Group ||
+				refConfig.Resource != fluxcdv1alpha1.ResourceFluxCDConfigs {
 				continue
 			}
 
