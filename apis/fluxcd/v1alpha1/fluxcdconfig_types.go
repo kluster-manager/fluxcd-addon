@@ -53,6 +53,8 @@ type FluxCDConfigSpec struct {
 	// +optional
 	SourceController SourceControllerSpec `json:"sourceController"`
 	// +optional
+	SourceWatcher SourceControllerSpec `json:"sourceWatcher"`
+	// +optional
 	Policies Policies `json:"policies"`
 	// +optional
 	Rbac Rbac `json:"rbac"`
@@ -71,6 +73,25 @@ type FluxCDConfigSpec struct {
 }
 
 type CRDsSpec struct {
+	// +optional
+	Annotations map[string]string `json:"annotations"`
+	// +optional
+	Migration MigrationSpec `json:"migration"`
+}
+
+type MigrationSpec struct {
+	// +optional
+	Enabled bool `json:"enabled"`
+	// +optional
+	Timeout string `json:"timeout"`
+	// +optional
+	Resources ResourceRequirements `json:"resources"`
+	// +optional
+	NodeSelector map[string]string `json:"nodeSelector"`
+	// +optional
+	Affinity core.Affinity `json:"affinity"`
+	// +optional
+	Tolerations []core.Toleration `json:"tolerations"`
 	// +optional
 	Annotations map[string]string `json:"annotations"`
 }
