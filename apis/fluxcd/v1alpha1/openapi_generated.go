@@ -51,6 +51,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.KustomizeControllerSpec":    schema_fluxcd_addon_apis_fluxcd_v1alpha1_KustomizeControllerSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.LocalObjectReference":       schema_fluxcd_addon_apis_fluxcd_v1alpha1_LocalObjectReference(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.MetricsEndpoints":           schema_fluxcd_addon_apis_fluxcd_v1alpha1_MetricsEndpoints(ref),
+		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.MigrationSpec":              schema_fluxcd_addon_apis_fluxcd_v1alpha1_MigrationSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Multitenancy":               schema_fluxcd_addon_apis_fluxcd_v1alpha1_Multitenancy(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.NotificationControllerSpec": schema_fluxcd_addon_apis_fluxcd_v1alpha1_NotificationControllerSpec(ref),
 		"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.PodMonitorSpec":             schema_fluxcd_addon_apis_fluxcd_v1alpha1_PodMonitorSpec(ref),
@@ -446,9 +447,17 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_CRDsSpec(ref common.ReferenceCallb
 							},
 						},
 					},
+					"migration": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.MigrationSpec"),
+						},
+					},
 				},
 			},
 		},
+		Dependencies: []string{
+			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.MigrationSpec"},
 	}
 }
 
@@ -939,6 +948,12 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_FluxCDConfigSpec(ref common.Refere
 							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec"),
 						},
 					},
+					"sourceWatcher": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.SourceControllerSpec"),
+						},
+					},
 					"policies": {
 						SchemaProps: spec.SchemaProps{
 							Default: map[string]interface{}{},
@@ -1374,6 +1389,89 @@ func schema_fluxcd_addon_apis_fluxcd_v1alpha1_MetricsEndpoints(ref common.Refere
 		},
 		Dependencies: []string{
 			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.Relabeling"},
+	}
+}
+
+func schema_fluxcd_addon_apis_fluxcd_v1alpha1_MigrationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"enabled": {
+						SchemaProps: spec.SchemaProps{
+							Default: false,
+							Type:    []string{"boolean"},
+							Format:  "",
+						},
+					},
+					"timeout": {
+						SchemaProps: spec.SchemaProps{
+							Default: "",
+							Type:    []string{"string"},
+							Format:  "",
+						},
+					},
+					"resources": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements"),
+						},
+					},
+					"nodeSelector": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+					"affinity": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/api/core/v1.Affinity"),
+						},
+					},
+					"tolerations": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("k8s.io/api/core/v1.Toleration"),
+									},
+								},
+							},
+						},
+					},
+					"annotations": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: "",
+										Type:    []string{"string"},
+										Format:  "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/kluster-manager/fluxcd-addon/apis/fluxcd/v1alpha1.ResourceRequirements", "k8s.io/api/core/v1.Affinity", "k8s.io/api/core/v1.Toleration"},
 	}
 }
 

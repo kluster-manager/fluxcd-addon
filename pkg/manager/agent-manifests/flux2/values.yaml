@@ -4,6 +4,21 @@ installCRDs: true
 crds:
   # -- Add annotations to all CRD resources, e.g. "helm.sh/resource-policy": keep
   annotations: {}
+  # -- Enable Flux CRs migration using helm pre upgrade hook job
+  migration:
+    enabled: false
+    timeout: 5m
+    resources:
+      limits: {}
+      # cpu: 1000m
+      # memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+    nodeSelector: {}
+    affinity: {}
+    tolerations: []
+    annotations: {}
 
 multitenancy:
   # -- Implement the patches for Multi-tenancy lockdown.
@@ -22,8 +37,8 @@ multitenancy:
 clusterDomain: cluster.local
 
 cli:
-  image: ghcr.io/fluxcd/flux-cli
-  tag: v2.6.4
+  image: ghcr.io/appscode/flux-cli
+  tag: v2.9.6
   nodeSelector: {}
   affinity: {}
   tolerations: []
@@ -35,8 +50,8 @@ cli:
 
 helmController:
   create: true
-  image: ghcr.io/fluxcd/helm-controller
-  tag: v1.3.0
+  image: ghcr.io/appscode-images/fluxcd-helm-controller
+  tag: v1.6.4
   resources:
     limits: {}
     # cpu: 1000m
@@ -83,8 +98,8 @@ helmController:
 
 imageAutomationController:
   create: true
-  image: ghcr.io/fluxcd/image-automation-controller
-  tag: v0.41.2
+  image: ghcr.io/appscode-images/fluxcd-image-automation-controller
+  tag: v1.2.5
   resources:
     limits: {}
     # cpu: 1000m
@@ -111,8 +126,8 @@ imageAutomationController:
 
 imageReflectionController:
   create: true
-  image: ghcr.io/fluxcd/image-reflector-controller
-  tag: v0.35.2
+  image: ghcr.io/appscode-images/fluxcd-image-reflector-controller
+  tag: v1.2.5
   resources:
     limits: {}
     # cpu: 1000m
@@ -139,8 +154,8 @@ imageReflectionController:
 
 kustomizeController:
   create: true
-  image: ghcr.io/fluxcd/kustomize-controller
-  tag: v1.6.1
+  image: ghcr.io/appscode-images/fluxcd-kustomize-controller
+  tag: v1.9.5
   resources:
     limits: {}
     # cpu: 1000m
@@ -187,8 +202,8 @@ kustomizeController:
 
 notificationController:
   create: true
-  image: ghcr.io/fluxcd/notification-controller
-  tag: v1.6.0
+  image: ghcr.io/appscode-images/fluxcd-notification-controller
+  tag: v1.9.4
   resources:
     limits: {}
     # cpu: 1000m
@@ -240,14 +255,46 @@ notificationController:
 
 sourceController:
   create: true
-  image: ghcr.io/fluxcd/source-controller
-  tag: v1.6.2
+  image: ghcr.io/appscode-images/fluxcd-source-controller
+  tag: v1.9.5
   resources:
     limits: {}
     # cpu: 1000m
     # memory: 1Gi
     requests:
       cpu: 100m
+      memory: 64Mi
+  priorityClassName: ""
+  annotations:
+    prometheus.io/port: "8080"
+    prometheus.io/scrape: "true"
+  labels: {}
+  container:
+    additionalArgs: []
+  serviceAccount:
+    create: true
+    automount: true
+    annotations: {}
+  imagePullPolicy: ""
+  service:
+    labels: {}
+    annotations: {}
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
+  extraEnv: []
+
+
+sourceWatcher:
+  create: false
+  image: ghcr.io/fluxcd/source-watcher
+  tag: v2.2.4
+  resources:
+    limits: {}
+    # cpu: 1000m
+    # memory: 1Gi
+    requests:
+      cpu: 50m
       memory: 64Mi
   priorityClassName: ""
   annotations:
