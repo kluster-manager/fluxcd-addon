@@ -1,48 +1,43 @@
-{{- if and .Values.imageReflectionController.create }}
+{{- if .Values.sourceWatcher.create }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/component: image-reflector-controller
+    app.kubernetes.io/component: source-watcher
     app.kubernetes.io/instance: {{ .Release.Namespace | quote }}
     app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
     app.kubernetes.io/version: {{ .Chart.AppVersion | quote  }}
     app.kubernetes.io/part-of: flux
     helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
     control-plane: controller
-    {{- with .Values.imageReflectionController.labels }}
+    {{- with .Values.sourceWatcher.labels }}
     {{- . | toYaml | nindent 4 }}
     {{- end }}
-  name: image-reflector-controller
+  name: source-watcher
   namespace: {{ .Release.Namespace }}
 spec:
-  {{- if kindIs "invalid" .Values.imageReflectionController.replicas }}
   replicas: 1
-  {{- else }}
-  replicas: {{ .Values.imageReflectionController.replicas  }}
-  {{- end}}
   selector:
     matchLabels:
-      app: image-reflector-controller
+      app: source-watcher
+  strategy:
+    type: Recreate
   template:
     metadata:
-      {{- with .Values.imageReflectionController.annotations }}
+      {{- with .Values.sourceWatcher.annotations }}
       annotations: {{ toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: image-reflector-controller
-{{ with .Values.imageReflectionController.labels }}{{ toYaml . | indent 8 }}{{ end }}
+        app: source-watcher
+{{ with .Values.sourceWatcher.labels }}{{ toYaml . | indent 8 }}{{ end }}
     spec:
-      automountServiceAccountToken: {{ .Values.imageReflectionController.serviceAccount.automount }}
-      {{- if .Values.imageReflectionController.initContainers}}
+      automountServiceAccountToken: {{ .Values.sourceWatcher.serviceAccount.automount }}
+      {{- if .Values.sourceWatcher.initContainers}}
       initContainers:
-        {{- toYaml .Values.imageReflectionController.initContainers | nindent 8}}
+        {{- toYaml .Values.sourceWatcher.initContainers | nindent 8}}
       {{- end}}
       containers:
       - args:
-        {{- if .Values.multitenancy.enabled }}
-        - --no-cross-namespace-refs=true
-        {{- end}}
         {{- if .Values.notificationController.create }}
         - --events-addr=http://notification-controller.$(RUNTIME_NAMESPACE).svc.{{ .Values.clusterDomain | default "cluster.local" }}.
         {{- end}}
@@ -50,7 +45,9 @@ spec:
         - --log-level={{ .Values.logLevel | default "info" }}
         - --log-encoding=json
         - --enable-leader-election
-        {{- range .Values.imageReflectionController.container.additionalArgs }}
+        - --storage-path=/data
+        - --storage-adv-addr=source-watcher.$(RUNTIME_NAMESPACE).svc.{{ .Values.clusterDomain | default "cluster.local" }}.
+        {{- range .Values.sourceWatcher.container.additionalArgs }}
         - {{ . }}
         {{- end}}
         env:
@@ -58,12 +55,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        {{- with .Values.imageReflectionController.extraEnv }}
+        {{- with .Values.sourceWatcher.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        image: {{ template "template.image" .Values.imageReflectionController }}
-        {{- if .Values.imageReflectionController.imagePullPolicy }}
-        imagePullPolicy: {{ .Values.imageReflectionController.imagePullPolicy }}
+        image: {{ template "template.image" .Values.sourceWatcher }}
+        {{- if .Values.sourceWatcher.imagePullPolicy }}
+        imagePullPolicy: {{ .Values.sourceWatcher.imagePullPolicy }}
         {{- else }}
         imagePullPolicy: IfNotPresent
         {{- end }}
@@ -73,20 +70,24 @@ spec:
             port: healthz
         name: manager
         ports:
+        - containerPort: 9090
+          name: http
+          protocol: TCP
         - containerPort: 8080
           name: http-prom
+          protocol: TCP
         - containerPort: 9440
           name: healthz
           protocol: TCP
         readinessProbe:
           httpGet:
-            path: /readyz
-            port: healthz
-        {{- with .Values.imageReflectionController.resources }}
+            path: /
+            port: http
+        {{- with .Values.sourceWatcher.resources }}
         resources: {{ toYaml . | nindent 10 }}
         {{- end }}
-        {{- if .Values.imageReflectionController.securityContext }}
-        securityContext: {{ toYaml .Values.imageReflectionController.securityContext | nindent 10 }}
+        {{- if .Values.sourceWatcher.securityContext }}
+        securityContext: {{ toYaml .Values.sourceWatcher.securityContext | nindent 10 }}
         {{- else }}
         securityContext:
           allowPrivilegeEscalation: false
@@ -94,50 +95,50 @@ spec:
             drop:
             - ALL
           readOnlyRootFilesystem: true
+          runAsNonRoot: true
           {{- if not .Values.distro.openshift }}
           runAsUser: 65534
           {{- end}}
-          runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
         {{- end}}
         volumeMounts:
-        - mountPath: /tmp
-          name: temp
         - mountPath: /data
           name: data
-        {{- if .Values.imageReflectionController.volumeMounts }}
-        {{- toYaml .Values.imageReflectionController.volumeMounts | nindent 8 }}
+        - mountPath: /tmp
+          name: tmp
+        {{- if .Values.sourceWatcher.volumeMounts }}
+        {{- toYaml .Values.sourceWatcher.volumeMounts | nindent 8 }}
         {{- end}}
-      {{- if .Values.imageReflectionController.priorityClassName }}
-      priorityClassName: {{ .Values.imageReflectionController.priorityClassName | quote }}
+      {{- if .Values.sourceWatcher.priorityClassName }}
+      priorityClassName: {{ .Values.sourceWatcher.priorityClassName | quote }}
       {{- end }}
-      {{- if .Values.imageReflectionController.podSecurityContext }}
-      securityContext: {{ toYaml .Values.imageReflectionController.podSecurityContext | nindent 8 }}
+      {{- if .Values.sourceWatcher.podSecurityContext }}
+      securityContext: {{ toYaml .Values.sourceWatcher.podSecurityContext | nindent 8 }}
       {{- else if not .Values.distro.openshift }}
       securityContext:
         fsGroup: 1337
       {{- end}}
-      serviceAccountName: image-reflector-controller
+      serviceAccountName: source-watcher-controller
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 6 }}
       {{- end }}
       terminationGracePeriodSeconds: 10
       volumes:
       - emptyDir: {}
-        name: temp
-      - emptyDir: {}
         name: data
-      {{- if .Values.imageReflectionController.volumes }}
-      {{- toYaml .Values.imageReflectionController.volumes | nindent 6 }}
+      - emptyDir: {}
+        name: tmp
+      {{- if .Values.sourceWatcher.volumes }}
+      {{- toYaml .Values.sourceWatcher.volumes | nindent 6 }}
       {{- end}}
-      {{- with .Values.imageReflectionController.nodeSelector }}
+      {{- with .Values.sourceWatcher.nodeSelector }}
       nodeSelector: {{ toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.imageReflectionController.affinity }}
+      {{- with .Values.sourceWatcher.affinity }}
       affinity: {{ toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.imageReflectionController.tolerations }}
+      {{- with .Values.sourceWatcher.tolerations }}
       tolerations: {{ toYaml . | nindent 8 }}
       {{- end }}
 {{- end }}
